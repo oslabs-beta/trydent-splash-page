@@ -62,6 +62,7 @@
       ]
     }
   ],
+  "backgroundImage": "/images/background2.png",
   "footerSocials": {
     "github": "https://github.com/oslabs-beta/trydent",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
