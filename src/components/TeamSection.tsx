@@ -18,6 +18,7 @@ const TeamSection:React.FC = () =>{
     title = {el.title}
     linkedinURL = {el.linkedinURL}
     githubURL = {el.githubURL}
+    image = {el.image}
     ></PersonCard>
   })
   return(
