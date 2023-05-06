@@ -42,8 +42,14 @@
     {
       "group": "Welcome",
       "pages": [
-        "docs/introduction",
-        "docs/features"
+        "p-welcome/introduction",
+        "p-welcome/features"
+      ]
+    },
+    {
+      "group": "Getting Started",
+      "pages": [
+        "p-getting-started/quick-start"
       ]
     },
     {
