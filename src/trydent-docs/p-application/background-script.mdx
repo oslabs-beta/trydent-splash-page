@@ -2,30 +2,136 @@
 title: background.js
 ---
 
-In this section we'll be going over how you can quickly get started with Trydent. 
+The `background.js` file is responsible for managing communication between the content script and the DevTools panel. It listens for connections from the DevTools panel, injects the content script into the active tab, and handles messages from the content script and the DevTools panel.
 
-# Installation
-Please note that Trydent is currently in beta and is not yet available on the Chrome Web Store.
-1. Clone the Trydent repository
-2. In your chrome extensions settings, please turn on developer mode.
-3. Click "Load Unpacked" and navigate to the `trydent` folder from the repository you cloned.
-4. Within the `trydent` folder, SELECT the `extension` folder.
-4. You should now see the Trydent icon downloaded in your chrome extensions.
-5. You can right click anywhere on the page and select "Trydent" to open the Trydent panel
-  - You can also use the keyboard shortcut `cmd + shift + J` on mac to open developer tools and navigate to the Trydent panel.
+## Overview
 
+The background script sets up listeners for the following events:
 
-## Generating End-To-End Tests
-1. Navigate to the Trydent panel
-2. Click the `New Test` button
-3. Enter your `describe` statement for your test suite  
-4. Select `Start Test` to proceed
-5. Enter your `it` statement for your test suite
-6. Select `Start Test` to start recording your test
-7. Perform the actions you want to test
-8. Select `Stop Recording & Generate Test` to stop recording your test and generate the test cloned
-9. Select `Copy` to copy the test to your clipboard
+1. Connection from the DevTools panel
+2. Tab activation
+3. Messages from the content script
+4. Context menu item clicks
 
-### Describe vs It statements
-A `describe` statement is a way to group your tests together and is usually used to describe a feature.  
-For example, if you were testing a login page, you might have a `describe` statement called "Login Page" and then have a `it` statement "should log in the user with valid credentials and redirect to the dashboard".
+When a connection is made with the DevTools panel, the background script injects the content script into the active tab. Messages from the content script are forwarded to the DevTools panel.
+
+## Functions
+
+### devToolsListener(message)
+This function is a listener for messages from the DevTools panel. It injects the content script into the tab specified by the message object.
+
+### chrome.runtime.onConnect.addListener(callback)
+This event listener listens for connections from the DevTools panel. When a connection is made, the `devToolsListener` function is added as a message listener and the content script is injected into the active tab.
+
+### chrome.tabs.onActivated.addListener(callback)
+This event listener listens for tab activation events. When a tab is activated, the content script is injected into the tab.
+
+### chrome.runtime.onMessage.addListener(callback)
+This event listener listens for messages from the content script. It handles the events and sends messages to the DevTools panel through the established connection.
+
+### chrome.contextMenus.onClicked.addListener(callback)
+This event listener listens for context menu item clicks. When the context menu item is clicked, the Trydent window is opened.
+
+## Code Snippets
+
+<CodeGroup>
+```javascript devToolsListener
+/**
+ * Listener function for messages from the devtools script
+ * Injects a content script into the tab specified by the message
+ *
+ * @param {Object} message - The message object
+ */
+function devToolsListener(message) {
+  // console.log('we are in background.js');
+
+  chrome.scripting.executeScript({
+    target: { tabId: message.tabId },
+    files: [message.scriptToInject],
+  });
+}
+```
+
+```javascript chrome.runtime.onConnect.addListener
+chrome.runtime.onConnect.addListener((connection) => {
+  devToolsConnection = connection;
+
+  // Add devToolsListener function as a listener for messages from the DevTools script
+  devToolsConnection.onMessage.addListener(devToolsListener);
+
+  // Remove devToolsListener function from listeners when the DevTools disconnects
+  devToolsConnection.onDisconnect.addListener(() => {
+    devToolsConnection.onMessage.removeListener(devToolsListener);
+  });
+});
+```
+
+```javascript chrome.tabs.onActivated.addListener
+chrome.tabs.onActivated.addListener(() => {
+  // console.log('changed to tab: ', tabId);
+  chrome.scripting.executeScript({
+    target: { tabId: message.tabId },
+    files: [message.scriptToInject],
+  });
+});
+```
+
+```javascript chrome.runtime.onMessage.addListener
+chrome.runtime.onMessage.addListener((message) => {
+  // Check event and proceed message accordingly
+  switch (message.action) {
+    case 'click':
+      // console.log('Clicked, message: ', message);
+      break;
+    case 'focus':
+      // console.log('Focused, message: ', message);
+      break;
+    case 'blur':
+      // console.log('Blurred, message: ', message);
+      break;
+    case 'change':
+      // console.log('Changed, message: ', message);
+      break;
+    default:
+      // console.log('Unknown event, message: ', message);
+  }
+  if (devToolsConnection) {
+    devToolsConnection.postMessage(message);
+  } else {
+    // console.error('devToolsConnection is not established yet');
+  }
+});
+```
+
+```javascript chrome.contextMenus.onClicked.addListener
+/**
+ * Listener for context menu item clicks
+ * Opens the Trydent window when the context menu item is clicked
+ *
+ * @listens chrome.contextMenus.onClicked
+ * @param {Object} info - Information about the context menu item that was clicked
+ */
+chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+  const options = {
+    type: 'panel',
+    left: 0,
+    top: 0,
+    width: 1000,
+    height: 1000,
+    url: chrome.runtime.getURL('panel.html'),
+  };
+  if (menuItemId === 'trydent-window') chrome.windows.create(options);
+});
+```
+
+```javascript chrome.contextMenus.create
+// Create a context menu item for Trydent
+chrome.contextMenus.create({
+  id: 'trydent-window',
+  title: 'Trydent',
+  contexts: ['all'],
+});
+```
+</CodeGroup>
+
+The `background.js` file sets up the necessary event listeners to manage communication between the content script and the DevTools panel, injects the content script into active tabs, and handles messages from the content script and the DevTools panel. The script also listens for context menu item clicks to open the Trydent window when needed.
