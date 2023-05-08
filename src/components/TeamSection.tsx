@@ -1,7 +1,7 @@
 import React from 'react';
 import PersonCard from './PersonCard';
 import members from '../members';
-import '../index.css'
+// import '../index.css'
 /**
  * The TeamSection component renders a section that holds 
  * personCards

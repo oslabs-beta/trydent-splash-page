@@ -22,12 +22,12 @@ class Member {
   }
 }
 
-const Jacob = new Member('Jacob', 'Gillan', 'Software Engineer','https://www.linkedin.com/in/jacob-gillan/','https://github.com/JakeGillan',jake)
-const Eric = new Member('Eric','Dunn','Software Engineer','https://www.linkedin.com/in/ericldunn/','https://github.com/ELDunn',eric)
 const Alastair = new Member('Alastair','Scheuermann','Software Engineer','https://www.linkedin.com/in/alastairsounds/','https://github.com/alastairsounds',alastair)
+const Eric = new Member('Eric','Dunn','Software Engineer','https://www.linkedin.com/in/ericldunn/','https://github.com/ELDunn',eric)
+const Jacob = new Member('Jacob', 'Gillan', 'Software Engineer','https://www.linkedin.com/in/jacob-gillan/','https://github.com/JakeGillan',jake)
 const Nicholas = new Member('Nicholas','Ly','Software Engineer','https://www.linkedin.com/in/nicholasly/','https://github.com/nicholas-l-ly',nicholas)
 const Samuel = new Member('Samuel','Lee','Software Engineer','https://www.linkedin.com/in/leesamuel423/','https://github.com/leesamuel423',sam)
 
-console.log(Nicholas)
-const members:Member[] = [Jacob,Eric,Alastair,Nicholas,Samuel]
+
+const members:Member[] = [Alastair,Eric,Jacob,Nicholas,Samuel]
 export default members
