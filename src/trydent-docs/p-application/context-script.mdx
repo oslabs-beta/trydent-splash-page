@@ -12,13 +12,23 @@ The script listens for the following events: 'click', 'focus', 'blur', and 'chan
 ### getRelativeXPath(element)
 
 This function takes an HTMLElement as an input and returns its relative XPath. The function prioritizes unique attributes (such as 'data-cy', 'data-test', 'data-testid', and 'id') when generating the XPath. If none of the unique attributes are present, the function calculates the element's position among its siblings with the same tag name. If the element is an anchor tag with an `href` attribute, the function updates global variables to indicate this.
-```javascript
+
+### inputEventListener(event, callback)
+This function serves as an event listener for input events like 'click', 'focus', 'blur', and 'change'. It takes an event object and a callback function as arguments. The function extracts relevant information from the event object (such as the target element's XPath and the event type) and then calls the callback function with the extracted data.
+
+## Event Listeners
+The script sets up event listeners for 'click', 'focus', 'blur', and 'change' events. For each event, it calls the `inputEventListener()` function, which in turn sends messages with the event details to the background script and the DevTools panel.
+
+## Code Snippets
+<CodeGroup>
+
+```javascript getRelativeXPath
 // Flag to indicate if the target element is an anchor tag with an href attribute
 let a = false;
 // Store the href attribute value of the anchor tag
 let href = '';
 
-/**
+/** 
  * Get the relative XPath of an element
  * @param {HTMLElement} element - The target element
  * @returns {string} - The relative XPath of the element
@@ -65,10 +75,9 @@ function getRelativeXPath(element) {
   const parentXPath = getRelativeXPath(element.parentElement);
   return `${parentXPath}/${tagName}[${position}]`;
 }
-```
-### inputEventListener(event, callback)
-This function serves as an event listener for input events like 'click', 'focus', 'blur', and 'change'. It takes an event object and a callback function as arguments. The function extracts relevant information from the event object (such as the target element's XPath and the event type) and then calls the callback function with the extracted data.
-```javascript
+``` 
+
+```javascript inputEventListener
 /**
  * Event listener for input events (click, focus, blur, change).
  * @param {Event} event - The event object
@@ -105,9 +114,8 @@ function inputEventListener(event, callback) {
   }
 }
 ```
-## Event Listeners
-The script sets up event listeners for 'click', 'focus', 'blur', and 'change' events. For each event, it calls the `inputEventListener()` function, which in turn sends messages with the event details to the background script and the DevTools panel.
-```javascript
+
+```javascript Event Listeners
 // Store the current window's URL
 const URL = window.location.href;
 
@@ -133,3 +141,4 @@ const URL = window.location.href;
 // Set up the inputEventListener with an empty callback function
 inputEventListener({}, () => {});
 ```
+</CodeGroup>
