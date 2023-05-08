@@ -1,0 +1,31 @@
+---
+title: background.js
+---
+
+In this section we'll be going over how you can quickly get started with Trydent. 
+
+# Installation
+Please note that Trydent is currently in beta and is not yet available on the Chrome Web Store.
+1. Clone the Trydent repository
+2. In your chrome extensions settings, please turn on developer mode.
+3. Click "Load Unpacked" and navigate to the `trydent` folder from the repository you cloned.
+4. Within the `trydent` folder, SELECT the `extension` folder.
+4. You should now see the Trydent icon downloaded in your chrome extensions.
+5. You can right click anywhere on the page and select "Trydent" to open the Trydent panel
+  - You can also use the keyboard shortcut `cmd + shift + J` on mac to open developer tools and navigate to the Trydent panel.
+
+
+## Generating End-To-End Tests
+1. Navigate to the Trydent panel
+2. Click the `New Test` button
+3. Enter your `describe` statement for your test suite  
+4. Select `Start Test` to proceed
+5. Enter your `it` statement for your test suite
+6. Select `Start Test` to start recording your test
+7. Perform the actions you want to test
+8. Select `Stop Recording & Generate Test` to stop recording your test and generate the test cloned
+9. Select `Copy` to copy the test to your clipboard
+
+### Describe vs It statements
+A `describe` statement is a way to group your tests together and is usually used to describe a feature.  
+For example, if you were testing a login page, you might have a `describe` statement called "Login Page" and then have a `it` statement "should log in the user with valid credentials and redirect to the dashboard".

@@ -43,13 +43,24 @@
       "group": "Welcome",
       "pages": [
         "p-welcome/introduction",
-        "p-welcome/features"
+        "p-welcome/features",
+        "p-getting-started/quick-start"
       ]
     },
     {
-      "group": "Getting Started",
+      "group": "Contributing",
       "pages": [
-        "p-getting-started/quick-start"
+        {
+          "group": "Documentation",
+          "pages": [
+            "p-application/chrome-overview",
+            "p-application/context-script",
+            "p-application/background-script",
+            "p-application/panel",
+            "p-application/manifest"
+          ]
+        },
+        "p-application/contributing-guidelines"
       ]
     },
     {
@@ -68,7 +79,7 @@
       ]
     }
   ],
-  "backgroundImage": "/images/background2.png",
+  "backgroundImage": "/images/darkskies.jpg",
   "footerSocials": {
     "github": "https://github.com/oslabs-beta/trydent",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
