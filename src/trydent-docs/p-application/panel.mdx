@@ -2,30 +2,84 @@
 title: panel.js
 ---
 
-In this section we'll be going over how you can quickly get started with Trydent. 
+## Overview
+The `panel.js` file is responsible for managing the recording process, updating the event array with user interactions, and communicating with the background script. The script listens for events emitted by the WelcomePage and TestPage components, such as starting and stopping the recording process.
 
-# Installation
-Please note that Trydent is currently in beta and is not yet available on the Chrome Web Store.
-1. Clone the Trydent repository
-2. In your chrome extensions settings, please turn on developer mode.
-3. Click "Load Unpacked" and navigate to the `trydent` folder from the repository you cloned.
-4. Within the `trydent` folder, SELECT the `extension` folder.
-4. You should now see the Trydent icon downloaded in your chrome extensions.
-5. You can right click anywhere on the page and select "Trydent" to open the Trydent panel
-  - You can also use the keyboard shortcut `cmd + shift + J` on mac to open developer tools and navigate to the Trydent panel.
+## Event Listeners
+
+### describeStatement
+This event listener listens for the `describeStatement` event triggered from the WelcomePage component. When the event is received, the `describeObj.description` value is updated with the input value from the event.
+
+### startRecording
+This event listener listens for the `startRecording` event triggered from the TestPage component. When the event is received, the recording state is set to true, the `describeObj.itStatements[0].itStatement` value is updated with the input value from the event, and the event array is cleared for a new test.
+
+### stopRecording
+This event listener listens for the `stopRecording` event triggered from the TestPage component. When the event is received, the recording state is set to false, and an asynchronous function is called to import the `describeCreator` function and generate the test code. The generated test code is then sent as a message to the window.
+
+<CodeGroup>
+  ```javascript describeStatement
+  // Listener for the "describeStatement" event triggered from WelcomePage
+  window.addEventListener('describeStatement', (e) => {
+    // assign describeObj value 
+    describeObj.description = e.detail.inputValue
+  });
+  ```
+
+  ```javascript startRecording
+  // Listener for the "startRecording" event triggered from TestPage
+  window.addEventListener('startRecording', (e) => {
+    isRecording = true;
+    describeObj.itStatements[0].itStatement = e.detail.inputValue
+    // Clear eventArr for a new test
+    eventArr.splice(0, eventArr.length);
+  });
+  ```
+
+  ```javascript stopRecording
+  // Listener for the "stopRecording" event triggered from TestPage
+  window.addEventListener('stopRecording', (e) => {
+    isRecording = false;
+    // Async function so when generated code is assigned, it's a string and not a promise
+    // This allows CodeBlock.tsx to easily catch the message
+    (async function() {
+      let generatedCode = await describeCreatorImport();
+      // console.log("Generated code: ", generatedCode);
+      window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
+    })();
+  });
+  ```
+</CodeGroup>
 
 
-## Generating End-To-End Tests
-1. Navigate to the Trydent panel
-2. Click the `New Test` button
-3. Enter your `describe` statement for your test suite  
-4. Select `Start Test` to proceed
-5. Enter your `it` statement for your test suite
-6. Select `Start Test` to start recording your test
-7. Perform the actions you want to test
-8. Select `Stop Recording & Generate Test` to stop recording your test and generate the test cloned
-9. Select `Copy` to copy the test to your clipboard
+## Functions
 
-### Describe vs It statements
-A `describe` statement is a way to group your tests together and is usually used to describe a feature.  
-For example, if you were testing a login page, you might have a `describe` statement called "Login Page" and then have a `it` statement "should log in the user with valid credentials and redirect to the dashboard".
+### describeCreatorImport
+This asynchronous function imports the `describeCreator` function from the `testCreator.js` file and executes it with the `describeObj` value. The function returns a Promise that resolves to the generated test code.
+
+<CodeGroup>
+  ```javascript describeCreatorImport
+  /**
+  * Async function to import describeCreator and execute it with describeObj
+  * @returns {Promise<string>} - The generated test code
+  */
+  async function describeCreatorImport() {
+    const { describeCreator } = await import("./bundles/utils/testCreator.js");
+    return describeCreator(describeObj);
+  }
+  ```
+
+  ```javascript backgroundPaeConnection
+  // Establishes a connection to background with a specific name
+  const backgroundPageConnection = chrome.runtime.connect({
+    name: 'devtools-page',
+  });
+
+  // Relay the tab ID to the background page as an object
+  backgroundPageConnection.postMessage({
+    tabId: chrome.devtools.inspectedWindow.tabId,
+    scriptToInject: 'content-script.js',
+  });
+  ```
+</CodeGroup>
+
+The `panel.js` file manages the recording process, updates the event array with user interactions, and communicates with the background script. The script listens for events emitted by the WelcomePage and TestPage components and handles them accordingly.
