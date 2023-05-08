@@ -17,7 +17,7 @@ const PersonCard: React.FC = (props) =>{
   return(
 
     <li className='bg-white bg-opacity-30 rounded-lg shadow-md backdrop-blur-sm border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none'>
-      <img src={image} className='sw-40 h-40 rounded-full border border-white border-opacity-30'></img>
+      <img src={image} className='w-40 h-40 rounded-full border border-white border-opacity-30'></img>
       <h4 className='font-bold'>{firstName} {lastName}</h4>
       <p className='italic text-xs pb-2'>{title}</p>
       <ul className='flex'>

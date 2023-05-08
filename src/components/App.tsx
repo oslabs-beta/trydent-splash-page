@@ -16,7 +16,6 @@ function App() {
       </p>
     </div>
       <article>
-        <h1>Checkout the Team!</h1>
         <TeamSection></TeamSection>
       </article>
     </>
