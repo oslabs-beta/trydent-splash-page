@@ -1,0 +1,137 @@
+---
+title: background.js
+---
+
+The `background.js` file is responsible for managing communication between the content script and the DevTools panel. It listens for connections from the DevTools panel, injects the content script into the active tab, and handles messages from the content script and the DevTools panel.
+
+## Overview
+
+The background script sets up listeners for the following events:
+
+1. Connection from the DevTools panel
+2. Tab activation
+3. Messages from the content script
+4. Context menu item clicks
+
+When a connection is made with the DevTools panel, the background script injects the content script into the active tab. Messages from the content script are forwarded to the DevTools panel.
+
+## Functions
+
+### devToolsListener(message)
+This function is a listener for messages from the DevTools panel. It injects the content script into the tab specified by the message object.
+
+### chrome.runtime.onConnect.addListener(callback)
+This event listener listens for connections from the DevTools panel. When a connection is made, the `devToolsListener` function is added as a message listener and the content script is injected into the active tab.
+
+### chrome.tabs.onActivated.addListener(callback)
+This event listener listens for tab activation events. When a tab is activated, the content script is injected into the tab.
+
+### chrome.runtime.onMessage.addListener(callback)
+This event listener listens for messages from the content script. It handles the events and sends messages to the DevTools panel through the established connection.
+
+### chrome.contextMenus.onClicked.addListener(callback)
+This event listener listens for context menu item clicks. When the context menu item is clicked, the Trydent window is opened.
+
+## Code Snippets
+
+<CodeGroup>
+```javascript devToolsListener
+/**
+ * Listener function for messages from the devtools script
+ * Injects a content script into the tab specified by the message
+ *
+ * @param {Object} message - The message object
+ */
+function devToolsListener(message) {
+  // console.log('we are in background.js');
+
+  chrome.scripting.executeScript({
+    target: { tabId: message.tabId },
+    files: [message.scriptToInject],
+  });
+}
+```
+
+```javascript chrome.runtime.onConnect.addListener
+chrome.runtime.onConnect.addListener((connection) => {
+  devToolsConnection = connection;
+
+  // Add devToolsListener function as a listener for messages from the DevTools script
+  devToolsConnection.onMessage.addListener(devToolsListener);
+
+  // Remove devToolsListener function from listeners when the DevTools disconnects
+  devToolsConnection.onDisconnect.addListener(() => {
+    devToolsConnection.onMessage.removeListener(devToolsListener);
+  });
+});
+```
+
+```javascript chrome.tabs.onActivated.addListener
+chrome.tabs.onActivated.addListener(() => {
+  // console.log('changed to tab: ', tabId);
+  chrome.scripting.executeScript({
+    target: { tabId: message.tabId },
+    files: [message.scriptToInject],
+  });
+});
+```
+
+```javascript chrome.runtime.onMessage.addListener
+chrome.runtime.onMessage.addListener((message) => {
+  // Check event and proceed message accordingly
+  switch (message.action) {
+    case 'click':
+      // console.log('Clicked, message: ', message);
+      break;
+    case 'focus':
+      // console.log('Focused, message: ', message);
+      break;
+    case 'blur':
+      // console.log('Blurred, message: ', message);
+      break;
+    case 'change':
+      // console.log('Changed, message: ', message);
+      break;
+    default:
+      // console.log('Unknown event, message: ', message);
+  }
+  if (devToolsConnection) {
+    devToolsConnection.postMessage(message);
+  } else {
+    // console.error('devToolsConnection is not established yet');
+  }
+});
+```
+
+```javascript chrome.contextMenus.onClicked.addListener
+/**
+ * Listener for context menu item clicks
+ * Opens the Trydent window when the context menu item is clicked
+ *
+ * @listens chrome.contextMenus.onClicked
+ * @param {Object} info - Information about the context menu item that was clicked
+ */
+chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+  const options = {
+    type: 'panel',
+    left: 0,
+    top: 0,
+    width: 1000,
+    height: 1000,
+    url: chrome.runtime.getURL('panel.html'),
+  };
+  if (menuItemId === 'trydent-window') chrome.windows.create(options);
+});
+```
+
+```javascript chrome.contextMenus.create
+// Create a context menu item for Trydent
+chrome.contextMenus.create({
+  id: 'trydent-window',
+  title: 'Trydent',
+  contexts: ['all'],
+});
+```
+</CodeGroup>
+
+The `background.js` file sets up the necessary event listeners to manage communication between the content script and the DevTools panel, injects the content script into active tabs, and handles messages from the content script and the DevTools panel. The script also listens for context menu item clicks to open the Trydent window when needed.

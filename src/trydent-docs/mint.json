@@ -40,12 +40,34 @@
   ],
   "navigation": [
     {
-      "group": "Home",
-      "pages": ["introduction", "features"]
+      "group": "Welcome",
+      "pages": [
+        "p-welcome/introduction",
+        "p-welcome/features",
+        "p-welcome/quick-start"
+      ]
+    },
+    {
+      "group": "Contributing",
+      "pages": [
+        {
+          "group": "Documentation",
+          "pages": [
+            "p-application/chrome-overview",
+            "p-application/context-script",
+            "p-application/background-script",
+            "p-application/panel",
+            "p-application/manifest"
+          ]
+        },
+        "p-application/contributing-guidelines"
+      ]
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
+      "pages": [
+        "api-reference/authentication"
+      ]
     },
     {
       "group": "Endpoint Examples",
@@ -57,9 +79,9 @@
       ]
     }
   ],
+  "backgroundImage": "/images/darkskies.jpg",
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
+    "github": "https://github.com/oslabs-beta/trydent",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
 }
