@@ -16,7 +16,7 @@ const PersonCard: React.FC = (props) =>{
   const {firstName, lastName, title, linkedinURL ,githubURL, image} = props;
   return(
 
-    <li className='bg-white bg-opacity-30 rounded-lg shadow-md backdrop-blur-sm border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none'>
+    <li className='bg-gray-300 bg-opacity-20 rounded-lg shadow-md backdrop-blur-sm border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none'>
       <img src={image} className='w-40 h-40 rounded-full border border-white border-opacity-30'></img>
       <h4 className='font-bold pt-2'>{firstName} {lastName}</h4>
       <p className='italic text-xs pb-4'>{title}</p>

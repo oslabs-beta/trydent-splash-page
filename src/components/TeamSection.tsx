@@ -24,7 +24,7 @@ const TeamSection:React.FC = () =>{
   })
 
   return(
-    <section className='text-center p-5'>
+    <section className='text-center p-5' style={{ background: 'radial-gradient(at 50% 200%, #f6f6f6, #072854)' }}>
     <p className='font-bold text-3xl mb-2'>Our team</p>
     <p className='mb-5'>We're a group of engineers driven by passion and enthusiasm for what we do.</p>
     <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
