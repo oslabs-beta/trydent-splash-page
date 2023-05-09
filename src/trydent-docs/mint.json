@@ -43,8 +43,8 @@
       "group": "Welcome",
       "pages": [
         "p-welcome/introduction",
-        "p-welcome/features",
-        "p-welcome/quick-start"
+        "p-welcome/quick-start",
+        "p-welcome/features"
       ]
     },
     {
