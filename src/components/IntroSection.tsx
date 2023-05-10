@@ -12,7 +12,7 @@ const IntroSection:React.FC = () =>{
 
   return (
     <>
-      <section className="p-10 grid lg:grid-cols-2 lg:gap-2 place-items-center" style={{ background: 'radial-gradient(at -800% -400%, #f6f6f6, #072854)' }}>
+      <section className="p-10 mt-10 grid lg:grid-cols-2 lg:gap-2 place-items-center" style={{ background: 'radial-gradient(at -800% -400%, #f6f6f6, #072854)' }}>
         <article className="text-center mb-4 w-3/4">
           <h1 className="text-5xl font-bold mb-4">Quickly generate E2E tests with Cypress code</h1>
           <p className="mb-4 text-2xl">Trydent is a Chrome DevTool that enables you to save time on your end-to-end tests by autogenerating Cypress code.</p>
