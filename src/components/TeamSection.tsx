@@ -28,7 +28,7 @@ const TeamSection:React.FC = () =>{
     // <section className='text-center p-10' style={{ background: 'radial-gradient(at 50% 200%, #f6f6f6, #072854)' }}>
     <section className='text-center p-10' style={{ background: 'radial-gradient(at 50% 20%, #f6f6f6, #072854)' }}>
     <p className='font-bold text-3xl mb-2 text-blue-900'>Our team</p>
-    <p className='mb-5 italic text-blue-900'>"We believe testing leads to failure and failure leads to understanding." - ELD</p>
+    <p className='mb-5 font-bold italic text-blue-900'>"We believe testing leads to failure and failure leads to understanding." - ELD</p>
     <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
       {memberCards}
     </div>
