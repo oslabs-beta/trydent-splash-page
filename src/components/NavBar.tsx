@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from '../assets/Brand Assets/trydent-icon blue-dark.png';
+import logo from '../assets/Brand Assets/trydent-name blue-main.png';
 import githubLogo from '../assets/github-mark/github-mark.png';
 
 const NavBar: React.FC = () => {
@@ -34,9 +34,9 @@ const NavBar: React.FC = () => {
     <nav className={`fixed top-0 left-0 w-full bg-gray-300 p-2 flex justify-between pl-5 pr-5 ${isSticky ? 'shadow-lg' : ''}`} style={{ zIndex: 9999 }}>
       <div className="flex items-center">
         <a href="/">
-          <img className="w-7 h-auto transition duration-300 ease-in-out transform hover:scale-105" src={logo} alt="Logo" />
+          <img className="h-7 transition duration-300 ease-in-out transform hover:scale-105" src={logo} alt="Logo" />
         </a>
-        <a className="pl-5 text-blue-900 text-3xl font-bold transition duration-300 ease-in-out transform hover:scale-105" href="/">Trydent</a>
+        {/* <a className="pl-5 text-blue-900 text-3xl font-bold transition duration-300 ease-in-out transform hover:scale-105" href="/">Trydent</a> */}
       </div>
 
       {/* this div remains hidden on small screens. It represents the nav bar options on the right side */}
