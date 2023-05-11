@@ -25,11 +25,11 @@ const IntroSection:React.FC = () =>{
           <a className="inline-block bg-gray-300 hover:bg-blue-600 text-blue-900 hover:text-gray-300 font-bold py-2 px-4 rounded-full transition-colors duration-300" href="https://trydent.mintlify.app/introduction">Get Started</a>
         </article>
         <div
-          className={` ${isClicked ? ' flex justify-center items-center min-h-screen fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-20 backdrop-blur-sm  z-50' : ''}`}
+          className={` ${isClicked ? ' flex justify-center items-center min-h-screen fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-30 backdrop-blur-md  z-50' : ''}`}
           onClick={handleClick}
         >
           <img src={gif}
-            className={`rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${isClicked ? 'scale-150 shadow-lg hover:scale-150' : ''}`}
+            className={`rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer  ${isClicked ? 'scale-150 shadow-lg hover:scale-150 border border-white' : ''}`}
             onClick={handleClick}
           />
         </div>
