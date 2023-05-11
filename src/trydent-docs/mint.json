@@ -5,7 +5,7 @@
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/logo/logo.png",
   "colors": {
     "primary": "#0069ED",
     "light": "#4D9CFF",
@@ -14,28 +14,18 @@
   "topbarLinks": [
     {
       "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+      "url": "p-application/chrome-overview"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://github.com/mintlify/starter"
+    "name": "Github",
+    "url": "https://github.com/oslabs-beta/trydent"
   },
   "anchors": [
-    {
-      "name": "API Reference",
-      "icon": "rectangle-terminal",
-      "url": "api-reference"
-    },
     {
       "name": "Changelog",
       "icon": "list",
       "url": "https://mintlify.com"
-    },
-    {
-      "name": "Community",
-      "icon": "discord",
-      "url": "https://mintlify.com/community"
     }
   ],
   "navigation": [
@@ -43,8 +33,8 @@
       "group": "Welcome",
       "pages": [
         "p-welcome/introduction",
-        "p-welcome/features",
-        "p-welcome/quick-start"
+        "p-welcome/quick-start",
+        "p-welcome/features"
       ]
     },
     {
@@ -57,29 +47,15 @@
             "p-application/context-script",
             "p-application/background-script",
             "p-application/panel",
-            "p-application/manifest"
+            "p-application/manifest",
+            "p-application/utils"
           ]
         },
         "p-application/contributing-guidelines"
       ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/authentication"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
-      ]
     }
   ],
-  "backgroundImage": "/images/darkskies.jpg",
+  "backgroundImage": "",
   "footerSocials": {
     "github": "https://github.com/oslabs-beta/trydent",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
