@@ -57,7 +57,8 @@
             "p-application/context-script",
             "p-application/background-script",
             "p-application/panel",
-            "p-application/manifest"
+            "p-application/manifest",
+            "p-application/utils"
           ]
         },
         "p-application/contributing-guidelines"
@@ -79,7 +80,7 @@
       ]
     }
   ],
-  "backgroundImage": "/images/darkskies.jpg",
+  "backgroundImage": "",
   "footerSocials": {
     "github": "https://github.com/oslabs-beta/trydent",
     "linkedin": "https://www.linkedin.com/company/mintsearch"

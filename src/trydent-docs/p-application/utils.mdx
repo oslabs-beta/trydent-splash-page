@@ -1,0 +1,98 @@
+---
+title: utils: testCreator.js
+---
+
+## Overview
+This section of the documentation provides an overview of the utility functions used in the extension. These functions are mainly responsible for generating the Cypress test code based on the user interactions recorded by the extension.
+
+## Event Listeners
+
+### switchCase
+The `switchCase` function takes an event object and generates a piece of Cypress test code for the action performed in the event. It supports the following actions: click, change (input), and navigate (click on a link).
+
+
+### describeCreator
+The `describeCreator` function takes a describe object and generates a complete Cypress test suite. The describe object contains the test URL, description, write-up, and an array of it statement objects.
+
+
+### itCreator
+The `itCreator` function takes an array of it statement objects and a URL, and generates a string of it statements. Each it statement object contains an it statement and an array of event objects.
+
+### actionCreator
+The `actionCreator` function takes an it statement object and a URL, and generates a string of actions for the it statement. The it statement object contains an it statement and an array of event objects.
+
+
+<CodeGroup>
+  ```javascript switchCase
+  import { EventObj } from './types/types';
+
+  function switchCase(event: EventObj): string {
+    let { selector, action, input, URL, a, href} = event;
+    if (a == true){
+      action = 'navigate'
+    }
+    switch (action) {
+      case 'click':
+        return `cy.xpath('${selector}').should('exist');
+        cy.xpath('${selector}').click({force:true});`;
+        break;
+      case 'change':
+        return `cy.xpath('${selector}').type('${input}');`;
+        break;
+      case 'navigate':
+        return `cy.xpath('${selector}').click();
+        cy.location('pathname').should('eq','${href}');`;
+        break;
+      default:
+        return 'didnt input a valid action';
+    }
+  }
+  ```
+  ```javascript describeCreator
+  import { Describe } from './types/types';
+
+export function describeCreator(obj: Describe): string {
+  const { URL, description, writeUp, itStatements } = obj;
+  let resultStr;
+  return (resultStr = `
+    //${writeUp}
+    describe('${description}', () => {
+      beforeEach(() => {
+        cy.visit('${URL}')
+      })
+        
+      ${itCreator(itStatements, URL)}
+    })`);
+}
+```
+```javascript itCreator
+import { itObject } from './types/types';
+
+function itCreator(itStatementsArr: itObject[], URL: string): string {
+  let itText = '';
+  itStatementsArr.forEach((itState) => {
+    itText += `
+    it(${actionCreator(itState, URL)})`;
+  });
+  return itText;
+}
+```
+```javascript actionCreator
+import { itObject } from './types/types';
+
+function actionCreator(eObj: itObject, URL: string): string {
+  const { itStatement, eventArr } = eObj;
+  let textBlock = '';
+  eventArr.forEach((event) => {
+    if (textBlock !== '')
+      textBlock += `
+        `;
+    textBlock += switchCase(event);
+  });
+  let resultText = `'${itStatement}', () => {
+        ${textBlock}
+      }`;
+  return resultText;
+}
+```
+</CodeGroup>
