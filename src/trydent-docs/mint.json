@@ -1,6 +1,5 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Documentation Starter Kit",
+  "name": "Trydent",
   "logo": {
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
