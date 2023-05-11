@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../index.css'
 import githubLogo from '../assets/github-mark/github-mark.svg'
 
 
@@ -16,7 +15,7 @@ const PersonCard: React.FC = (props) =>{
   const {firstName, lastName, title, linkedinURL ,githubURL, image} = props;
   return(
 
-    <li className='bg-gray-300 bg-opacity-20 rounded-lg shadow-lg backdrop-blur-sm border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl '>
+    <li className='bg-gray-300 bg-opacity-20 backdrop-blur-sm rounded-lg shadow-lg border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl '>
       <img src={image} className='w-40 h-40 rounded-full border border-white border-opacity-30'></img>
       <h4 className='font-bold pt-2 text-blue-900'>{firstName} {lastName}</h4>
       <p className='italic text-xs pb-4 text-blue-900'>{title}</p>
