@@ -37,9 +37,10 @@ const NavBar: React.FC = () => {
       </div>
 
       <div className="hidden md:flex items-center space-x-4">
-        <a className="text-blue-900 font-bold" href="/docs">Docs</a>
+        <a className="text-blue-900 font-bold" href="https://trydent.mintlify.app/introduction">Docs</a>
+        {/* need to change below to a navigation to the media page */}
         <a className="text-blue-900 font-bold" href="/media">Media</a>
-        <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/oslabs-beta/trydent" target="_blank" rel="noopener noreferrer">
           <img src={githubLogo} className="w-7 h-auto" alt="GitHub Logo" />
         </a>
       </div>
@@ -58,7 +59,8 @@ const NavBar: React.FC = () => {
 
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-gray-300 p-2 flex flex-col items-center space-y-2 border-t border-blue-900">
-          <a className="block text-blue-900 " href="/docs">Docs</a>
+          <a className="block text-blue-900 " href="/https://trydent.mintlify.app/introduction">Docs</a>
+            {/* need to change below to a navigation to the media page */}
           <a className="block text-blue-900 " href="/media">Media</a>
           <a className="block text-blue-900 " href="https://github.com/oslabs-beta/trydent">Github</a>
         </div>
