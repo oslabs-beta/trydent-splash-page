@@ -4,6 +4,18 @@ import alastair from './assets/profiles/Alastair.jpg';
 import nicholas from './assets/profiles/Nicholas_Ly.jpeg';
 import sam from './assets/profiles/Sam_Lee.jpg';
 
+/**
+ * Creates the Member class
+ * 
+ * @param {string} firstName This is the member first name
+ * @param {string} lastName This is the member last name
+ * @param {string} title This is the software engineering title or the like
+ * @param {string} linkedinURL This is the linkedin URL
+ * @param {string} githubURL This is the github URL
+ * @param {string} image This is the image filepath
+ * @returns {Member} 
+ */
+
 class Member {
   firstName: string;
   lastName: string;
