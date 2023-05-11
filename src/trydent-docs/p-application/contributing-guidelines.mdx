@@ -4,62 +4,192 @@ title: Contributing Guidelines
 
 Thank you for your interest in contributing to Trydent! We welcome and appreciate contributions from the community. This document outlines the guidelines to follow when contributing to the project.
 
-## Code of Conduct
-Please read and follow our [Code of Conduct](./CODE_OF_CONDUCT.md) to ensure a positive, inclusive, and collaborative environment for all contributors.
-**TODO NEED TO LINK CODE OF Conduct**
-
-## Setting up the Development Environment
-
-1. Ensure you have the required prerequisites installed (Node.js, npm, React, Chrome).
+## Building from Source
+1. Ensure you have the required prerequeisites installed:
+    - [Node.js](https://nodejs.org/en/) (v12 or higher)
+    - [npm](https://www.npmjs.com/) (v6 or higher)
+    - [Google Chrome](https://www.google.com/chrome/) (v80 or higher)
 2. Fork the Trydent repository to your own GitHub account.
-3. Clone the forked repository to your local machine.
-4. Navigate to the project directory and run `npm install` in both the root project directory and the client directory to install dependencies.
-5. Run `npm run build` in the client directory to build the application.
-6. Chrome directions...............
+3. Clone your forked repository to your local machine.
+```bash
+git clone https://github.com/<your-github-username>/trydent.git
+```
+4. Navigate to the root project directory and install dependencies.
+```bash
+cd trydent
+npm install
+```
+5. Navigate to the client directory and install dependencies.
+```bash
+cd client
+npm install
+```
+6. Build the application in the client directory
+```bash
+npm run build
+```
+7. Load Trydent into your Chrome extensions.
+    - Open Google Chrome and navigate to `chrome://extensions/`
+    - Enable Developer Mode
+    - Click "Load unpacked" and select the `extensions` directory in your local 'trydent' repository.  
 
-## Issue Tracking and Bug Reporting
+Now you should be able to change Trydent code and see the changes instantly reflected in your browser!
 
-Before submitting a new issue or bug report, please search the existing issues to avoid duplicates. When creating a new issue, include the following information:
+## Documentation for Consideration
+Trydent is a tool aimed to provide a better experience for developers in creating E2E tests. Therefore, it is recommended to familiarize yourself with the [Trydent documentation](./chrome-overview).
 
-- A clear and concise description of the issue or feature request.
-- Steps to reproduce the issue (if applicable).
-- Expected behavior and actual behavior (for bug reports).
-- Screenshots, logs, or error messages (if applicable).
+## Coding Standards
 
-## Feature Development and Code Contribution Process 
+Follow these coding standards when contributing to Trydent:
+<CardGroup cols={3}>
+  <Card
+    title="ESLint"
+    icon="broom"
+    href="https://eslint.org/"
+  >
+  Use ESLint to ensure your code adheres to the project's style guidelines.
+  </Card>
+  <Card
+    title="JSDocs"
+    icon="font"
+    href="https://jsdoc.app/"
+  >
+  Write comments to explain code following the JSDoc format. Also, use descriptive variable and function names.
+  </Card>
+  <Card
+    title="Modularization"
+    icon="shapes"
+  >
+  Organize your code into logical units and separate files as needed.
+  </Card>
+</CardGroup>
 
+## File Structure
+```
+.
+├── LICENSE
+├── README.md
+├── client
+│   ├── assets
+│   │   ├── testing-tamed.png
+│   │   └── trydent-banner.png
+│   ├── components
+│   │   ├── App.tsx
+│   │   ├── TopBar.tsx
+│   │   └── pages
+│   │       ├── CodeBlock.tsx
+│   │       ├── TestPage.tsx
+│   │       └── WelcomePage.tsx
+│   ├── index.html
+│   ├── jest.config.js
+│   ├── main.tsx
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── scss
+│   │   ├── _codeBlock.scss
+│   │   ├── _eventLogger.scss
+│   │   ├── _styles.scss
+│   │   ├── _testPage.scss
+│   │   ├── _topBar.scss
+│   │   ├── _variables.scss
+│   │   ├── _welcomePage.scss
+│   │   └── application.scss
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── utils
+│   │   ├── testCreator.ts
+│   │   └── types
+│   │       └── types.ts
+│   └── vite.config.ts
+├── extension
+│   ├── assets
+│   │   ├── icon128.png
+│   │   ├── icon16.png
+│   │   └── icon48.png
+│   ├── background.js
+│   ├── bundles
+│   │   ├── assets
+│   │   │   ├── buttons.esm.js
+│   │   │   ├── index.css
+│   │   │   └── index.js
+│   │   ├── components
+│   │   │   ├── App.js
+│   │   │   ├── TopBar.js
+│   │   │   └── pages
+│   │   │       ├── CodeBlock.js
+│   │   │       ├── TestPage.js
+│   │   │       └── WelcomePage.js
+│   │   ├── index.html
+│   │   ├── main.js
+│   │   ├── utils
+│   │   │   ├── testCreator.js
+│   │   │   └── types
+│   │   │       └── types.js
+│   │   └── vite.config.js
+│   ├── content-script.js
+│   ├── devtool.html
+│   ├── devtools.js
+│   ├── manifest.json
+│   ├── panel.html
+│   └── panel.js
+├── package-lock.json
+├── package.json
+└── server
+    ├── index.ts
+    ├── package-lock.json
+    ├── package.json
+    └── tsconfig.json
+```
+
+## Chrome Developer Resources
+If you're new to Chrome extension development, we recommend checking out the official [Chrome Developer Docs](https://developer.chrome.com/) to get started.
+
+## Feature Development and Code Contribution Process
 1. Create a new branch in your forked repository for each feature or bug fix.
 2. Write clear, concise, and well-documented code following the project's coding standards.
 3. Add or update tests to cover your changes.
 4. Ensure all tests pass and your code adheres to the project's style guidelines.
 5. Commit your changes and push your branch to your forked repository.
-6. Submit a pull request (PR) to the main Trydent repository with a clear description of your changes.
+6. Submit a pull request (PR) to the main Trydent repository's 'dev' branch with a clear description of your changes.
 
-## Coding Standards
 
-Follow these coding standards when contributing to Trydent:
-- Use [ESLint](https://eslint.org/) to ensure your code adheres to the project's style guidelines.
-- Use descriptive variable and function names.
-- Write comments to explain code following the [JSDoc](https://jsdoc.app/) format.
-- Organize your code into logical units and separate files as needed.
+## Issue Tracking and Bug Reporting
 
-## Testing
-
-Run the test suite locally before submitting a PR to ensure your changes do not introduce regressions. Follow these steps to run tests:
-
-1. Navigate to the project directory.
-2. Run `npm test` to execute the test suite.
-
-## Documentation
-
-Update the relevant documentation when adding new features or modifying existing functionality. Ensure your documentation is clear, concise, and adheres to the project's documentation style.
+Before submitting a new issue or bug report, please search the existing issues to avoid duplicates. When creating a new issue, include the following information:
+<CardGroup cols={3}>
+  <Card
+    title="Clear Description"
+    icon="wind"
+  >
+  Include a clear and concise description of the issue or feature request as well as steps to reproduce the issue (if applicable)
+  </Card>
+  <Card
+    title="Expected vs Actual"
+    icon="bug"
+  >
+  Describe expected behavior and actual behavior (for bug reports).
+  </Card>
+  <Card
+    title="Pictures"
+    icon="camera"
+  >
+  Include screenshots, logs, or error messages (if applicable).
+  </Card>
+</CardGroup>
 
 ## Review Process
 
 Once you submit a PR, the project maintainers will review your changes. They may request changes or provide feedback. Address any requested changes promptly to ensure your PR can be merged in a timely manner.
 
-## Community and Communication
+## Trydent Website
+The Trydent website can be updated [here](https://github.com/oslabs-beta/trydent-splash-page).
 
-Join our community and participate in discussions through mailing lists, meetings, or online forums. Reach out to the project maintainers or other contributors for help or guidance.
+## Stretch Features to Implement
+- [ ] Add support for more granular events
+- [ ] Add support for utilizing multiple it statements
+- [ ] Add support for deletion of inputs without breaking test (ie: a click event before a type event shouldn't be able to be deleted without deleting the type event first)
+- [ ] Adding support to editing existing tests
+- [ ] More robust xPath generation (currently only supports xPath generation for elements with an id attribute)
+- [ ] Add ability to run the test from the extension
 
 Thank you for contributing to Trydent!
