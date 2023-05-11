@@ -1,4 +1,4 @@
-import '../index.css'
+
 import AboutSection from './AboutSection'
 import FooterSection from './FooterSection'
 import GetStartedSection from './GetStartedSection'

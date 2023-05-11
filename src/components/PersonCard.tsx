@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../index.css'
 import githubLogo from '../assets/github-mark/github-mark.svg'
 
 
