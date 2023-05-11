@@ -39,6 +39,7 @@ const NavBar: React.FC = () => {
         <a className="pl-5 text-blue-900 text-3xl font-bold" href="/">Trydent</a>
       </div>
 
+      {/* this div remains hidden on small screens. It represents the nav bar options on the right side */}
       <div className="hidden md:flex items-center space-x-4">
         <a className="text-blue-900 font-bold" href="https://trydent.mintlify.app/introduction">Docs</a>
         {/* need to change below to a navigation to the media page */}
@@ -47,7 +48,7 @@ const NavBar: React.FC = () => {
           <img src={githubLogo} className="w-7 h-auto" alt="GitHub Logo" />
         </a>
       </div>
-
+      {/* this div remains hidden on med screens and larger, when the window is small, it is a menu bar that gives nav options */}
       <div className="md:hidden flex items-center">
         <button
           className="text-blue-900 font-bold p-2 focus:outline-none"
@@ -56,10 +57,10 @@ const NavBar: React.FC = () => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
-
         </button>
       </div>
-      {/* this is condtional rendering format {Boolean && (<>)} if boolean true, render element in () */}
+
+      {/* this is condtional rendering format {Boolean && (<>)} if boolean true(on click), render element in () */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-gray-300 p-2 flex flex-col items-center space-y-2 border-t border-blue-900">
           <a className="block text-blue-900 " href="/https://trydent.mintlify.app/introduction">Docs</a>
