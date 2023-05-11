@@ -2,30 +2,85 @@
 title: manifest.json
 ---
 
-In this section we'll be going over how you can quickly get started with Trydent. 
-
-# Installation
-Please note that Trydent is currently in beta and is not yet available on the Chrome Web Store.
-1. Clone the Trydent repository
-2. In your chrome extensions settings, please turn on developer mode.
-3. Click "Load Unpacked" and navigate to the `trydent` folder from the repository you cloned.
-4. Within the `trydent` folder, SELECT the `extension` folder.
-4. You should now see the Trydent icon downloaded in your chrome extensions.
-5. You can right click anywhere on the page and select "Trydent" to open the Trydent panel
-  - You can also use the keyboard shortcut `cmd + shift + J` on mac to open developer tools and navigate to the Trydent panel.
+## Overview
+The `manifest.json` file is a critical component in any Chrome extension. It provides essential metadata about the extension to both the Chrome browser and the Chrome Web Store.
 
 
-## Generating End-To-End Tests
-1. Navigate to the Trydent panel
-2. Click the `New Test` button
-3. Enter your `describe` statement for your test suite  
-4. Select `Start Test` to proceed
-5. Enter your `it` statement for your test suite
-6. Select `Start Test` to start recording your test
-7. Perform the actions you want to test
-8. Select `Stop Recording & Generate Test` to stop recording your test and generate the test cloned
-9. Select `Copy` to copy the test to your clipboard
+Here's an in-depth explanation of the manifest properties in the `manifest.json` file for Trydent:
 
-### Describe vs It statements
-A `describe` statement is a way to group your tests together and is usually used to describe a feature.  
-For example, if you were testing a login page, you might have a `describe` statement called "Login Page" and then have a `it` statement "should log in the user with valid credentials and redirect to the dashboard".
+#### name
+This is the official name of the Chrome extension as it will appear to users. It's currently set as "Trydent".
+
+#### version
+This indicates the current version of the Chrome extension, following the semantic versioning guidelines. The current version is "1.0.1".
+
+#### devtools page
+The devtools_page property declares a page that will be added to the Chrome Developer Tools as a new panel. The property value is a path to an HTML file within the extension's directory. In this case, it is set to "devtool.html".
+
+#### description
+This provides a brief description of the extension's functionality. For Trydent, it's defined as "A Chrome extension that helps you create E2E testing through Cypress".
+
+#### manifest version
+This property defines the version of the manifest file format that the package requires. As of Chrome 88, Manifest V3 (MV3) is the current version used by Chrome extensions. This extension uses the MV3 format, indicated by a manifest_version of "3".
+
+#### background
+This property is used to register a background service worker, which is a script that runs in the background independently of any user interface. For Trydent, it's "background.js". It also defines a DevTools panel that loads "panel.html" and has the title "panel".
+
+#### icons
+This property provides paths to one or more icon files. These icons represent your extension in various places such as the extensions management page, the address bar, and the Chrome Web Store. The icons are set to three different sizes: 16x16, 48x48, and 128x128 pixels.
+
+#### content scripts
+This property lists JavaScript files that should be injected into pages matching the specified URL patterns. These scripts are run in the context of those pages. In the case of Trydent, the "content-script.js" file is injected into all URLs `<all_urls>`.
+
+#### permissions
+This property specifies the permissions your extension requires. Permissions determine which APIs the extension can access. The permissions requested by Trydent include "background", "contextMenus", "tabs", "activeTab", "scripting", and "clipboardWrite".
+
+#### host permissions
+This property specifies which hosts the extension can communicate with. It's currently set to `<all_urls>`, which means the extension can interact with all hosts.
+
+These are the main properties specified in Trydent's manifest.json file. Each property has a specific purpose and plays a crucial role in the extension's functionality. Always ensure to correctly fill out this file to avoid any potential issues with your Chrome extension.
+
+<CodeBlock>
+```javascript manifest.json
+{
+  "name": "Trydent",
+  "version": "1.0.1",
+  "devtools_page": "devtool.html",
+  "description": "A Chrome extension that helps you create E2E testing thorugh Cypress",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js",
+    "devtools": {
+      "panel": "panel.html",
+      "title": "panel"
+    }
+  },
+  "icons": {
+    "16":"assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "background",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
+```
+</CodeBlock>
