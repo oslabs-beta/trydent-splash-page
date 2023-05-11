@@ -29,7 +29,7 @@ const IntroSection:React.FC = () =>{
           onClick={handleClick}
         >
           <img src={gif}
-            className={`transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${isClicked ? 'scale-150 shadow-lg hover:scale-150' : ''}`}
+            className={`rounded-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${isClicked ? 'scale-150 shadow-lg hover:scale-150' : ''}`}
             onClick={handleClick}
           />
         </div>
