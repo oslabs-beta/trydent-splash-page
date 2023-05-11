@@ -1,0 +1,34 @@
+---
+title: JavaScript Runtime Overview
+---
+
+## Overview
+Chrome Extensions consist of various components that communicate with each other to perform specific tasks. The main components in a Chrome extension are the content script, background script, and panel script (in case of a DevTools extension). These components work together to provide the extension's functionality. Let's look at how these components communicate with each other:
+
+## Content Script
+The content script is a JavaScript file that runs in the context of a web page. It has access to the DOM and can read or modify the page content. Content scripts are isolated from the rest of the extension, so they cannot directly access the extension's background page, storage, or other components.
+
+To communicate with other parts of the extension, content scripts can send and receive messages using `chrome.runtime.sendMessage()` and `chrome.runtime.onMessage` listener.
+
+## Background Script
+The background script is a JavaScript file that runs in the background, independent of any web page or browser action. It can manage the extension's state, perform long-running tasks, and communicate with other parts of the extension, like content scripts or DevTools panels.
+
+Background scripts can send messages to content scripts using `chrome.tabs.sendMessage()` and listen for messages from content scripts using `chrome.runtime.onMessage` listener.
+
+
+## Panel Script (DevTools Extension)
+The panel script is a JavaScript file that runs inside a custom panel in Chrome DevTools. It can interact with the DevTools API, manipulate the inspected page, and communicate with the background script.
+
+To communicate with the background script, the panel script can use `chrome.runtime.connect()` to establish a connection and send messages using `postMessage()`. The background script can listen for messages from the panel script using `chrome.runtime.onConnect` listener.
+
+## Communication Flow
+
+1. The content script detects user interactions on the web page and sends messages containing the captured events to the background script using `chrome.runtime.sendMessage()`.
+2. The background script listens for messages from the content script using `chrome.runtime.onMessage` listener. It can process the received data and send messages to the panel script.
+3. The panel script establishes a connection with the background script using `chrome.runtime.connect()`. It can send and receive messages from the background script using `postMessage()` and listen for messages using an event listener.
+4. The panel script can also send messages to the content script through the background script by requesting the background script to relay the message using `chrome.tabs.sendMessage()`.
+
+By using this messaging system, the content script, background script, and panel script can communicate with each other, share data, and coordinate tasks to provide the extension's functionality.
+
+![Communication Flow](../images/chrome-structure.avif)
+(Source: [Google Chrome Extending Dev Tools](https://developer.chrome.com/docs/extensions/mv2/devtools/))

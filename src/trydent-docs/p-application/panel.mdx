@@ -1,0 +1,85 @@
+---
+title: panel.js
+---
+
+## Overview
+The `panel.js` file is responsible for managing the recording process, updating the event array with user interactions, and communicating with the background script. The script listens for events emitted by the WelcomePage and TestPage components, such as starting and stopping the recording process.
+
+## Event Listeners
+
+### describeStatement
+This event listener listens for the `describeStatement` event triggered from the WelcomePage component. When the event is received, the `describeObj.description` value is updated with the input value from the event.
+
+### startRecording
+This event listener listens for the `startRecording` event triggered from the TestPage component. When the event is received, the recording state is set to true, the `describeObj.itStatements[0].itStatement` value is updated with the input value from the event, and the event array is cleared for a new test.
+
+### stopRecording
+This event listener listens for the `stopRecording` event triggered from the TestPage component. When the event is received, the recording state is set to false, and an asynchronous function is called to import the `describeCreator` function and generate the test code. The generated test code is then sent as a message to the window.
+
+<CodeGroup>
+  ```javascript describeStatement
+  // Listener for the "describeStatement" event triggered from WelcomePage
+  window.addEventListener('describeStatement', (e) => {
+    // assign describeObj value 
+    describeObj.description = e.detail.inputValue
+  });
+  ```
+
+  ```javascript startRecording
+  // Listener for the "startRecording" event triggered from TestPage
+  window.addEventListener('startRecording', (e) => {
+    isRecording = true;
+    describeObj.itStatements[0].itStatement = e.detail.inputValue
+    // Clear eventArr for a new test
+    eventArr.splice(0, eventArr.length);
+  });
+  ```
+
+  ```javascript stopRecording
+  // Listener for the "stopRecording" event triggered from TestPage
+  window.addEventListener('stopRecording', (e) => {
+    isRecording = false;
+    // Async function so when generated code is assigned, it's a string and not a promise
+    // This allows CodeBlock.tsx to easily catch the message
+    (async function() {
+      let generatedCode = await describeCreatorImport();
+      // console.log("Generated code: ", generatedCode);
+      window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
+    })();
+  });
+  ```
+</CodeGroup>
+
+
+## Functions
+
+### describeCreatorImport
+This asynchronous function imports the `describeCreator` function from the `testCreator.js` file and executes it with the `describeObj` value. The function returns a Promise that resolves to the generated test code.
+
+<CodeGroup>
+  ```javascript describeCreatorImport
+  /**
+  * Async function to import describeCreator and execute it with describeObj
+  * @returns {Promise<string>} - The generated test code
+  */
+  async function describeCreatorImport() {
+    const { describeCreator } = await import("./bundles/utils/testCreator.js");
+    return describeCreator(describeObj);
+  }
+  ```
+
+  ```javascript backgroundPaeConnection
+  // Establishes a connection to background with a specific name
+  const backgroundPageConnection = chrome.runtime.connect({
+    name: 'devtools-page',
+  });
+
+  // Relay the tab ID to the background page as an object
+  backgroundPageConnection.postMessage({
+    tabId: chrome.devtools.inspectedWindow.tabId,
+    scriptToInject: 'content-script.js',
+  });
+  ```
+</CodeGroup>
+
+The `panel.js` file manages the recording process, updates the event array with user interactions, and communicates with the background script. The script listens for events emitted by the WelcomePage and TestPage components and handles them accordingly.
