@@ -1,7 +1,7 @@
 import React from 'react';
 import PersonCard from './PersonCard';
 import members from '../members';
-// import '../index.css'
+
 /**
  * The TeamSection component renders a section that holds 
  * personCards
@@ -25,7 +25,6 @@ const TeamSection:React.FC = () =>{
   })
 
   return(
-    // <section className='text-center p-10' style={{ background: 'radial-gradient(at 50% 200%, #f6f6f6, #072854)' }}>
     <section className='text-center p-10' style={{ background: 'radial-gradient(at 50% 20%, #f6f6f6, #072854)' }}>
     <p className='font-bold text-3xl mb-2 text-blue-900'>Our team</p>
     <p className='mb-5 font-bold italic text-blue-900'>"We believe testing leads to failure and failure leads to understanding." - ELD</p>
