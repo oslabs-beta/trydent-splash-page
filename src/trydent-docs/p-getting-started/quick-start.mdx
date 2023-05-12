@@ -4,11 +4,12 @@ description: "Get your first test generated in just a few minutes"
 ---
 
 ## Installation: Chrome Web Store
+Trydent is available on the chrome web store for easily installation [here]().
 
 ## Installation: Manual
 1. Ensure you have the required prerequisites installed:
-    - [npm](https://www.npmjs.com/)
-    - [Google Chrome](https://www.google.com/chrome/)
+    - [npm](https://www.npmjs.com/) *(version 9.5.1 or higher)*
+    - [Google Chrome](https://www.google.com/chrome/) *(version 112.0 or higher)*
 2. Fork the Trydent repository to your own GitHub account.
 3. Clone your forked repository to your local machine:
 ```bash
@@ -36,9 +37,40 @@ npm run build
 Now you should be able to access Trydent in the developer tools or right-click and select Trydent.
 
 ## Generating End-To-End Tests
-<Card>
-! Add with assertion mode here
+<Card
+  title="1. Navigate and Open Trydent"
+>
+  Navigate to the page you want to test in your browser. Right-click and select Trydent. This will open the Trydent extension.
 </Card>
+<Card
+  title="2. Describe Statement"
+>
+  Enter the describe statement for your test. This will be the name of the test suite that is generated.
+  Proceed to "Start Test"
+</Card>
+<Card
+  title="4. It Statement"
+>
+  Enter the it statement for your test. This will be the name of the test case that is generated.
+  Proceed to the "Generate Test" button.
+</Card>
+<Card
+  title="5. End to End User Experience"
+>
+  Run through the user experience you want to test. Trydent will locally record your actions.
+  <Note>
+  Assertions enable you to validate the state of the DOM at any point during your test. You can add assertions by hovering over the component to assert and keydown "e" + "z" simultaneously.
+  </Note>
+  Your "Input Log" will be populated with the actions and assertions you make.
+</Card>
+<Card
+  title="6. Generate Code"
+>
+  Once you are finished recording, click the "Stop Recording and Generate Test" button. This will generate your test code.
+  You can press the copy button to immediately copy the code to your clipboard.
+</Card>
+
+
 
 
 ## Get Help
