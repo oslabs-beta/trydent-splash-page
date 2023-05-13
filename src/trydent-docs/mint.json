@@ -31,8 +31,7 @@
       "group": "Getting Started",
       "pages": [
         "p-getting-started/welcome",
-        "p-getting-started/quick-start",
-        "p-getting-started/features"
+        "p-getting-started/quick-start"
       ]
     },
     {
