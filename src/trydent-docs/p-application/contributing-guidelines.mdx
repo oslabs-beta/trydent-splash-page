@@ -4,39 +4,42 @@ title: Contributing Guidelines
 
 Thank you for your interest in contributing to Trydent! We welcome and appreciate contributions from the community. This document outlines the guidelines to follow when contributing to the project.
 
-## Building from Source
-1. Ensure you have the required prerequeisites installed:
-    - [Node.js](https://nodejs.org/en/) (v12 or higher)
-    - [npm](https://www.npmjs.com/) (v6 or higher)
-    - [Google Chrome](https://www.google.com/chrome/) (v80 or higher)
+
+## Installation: Manual
+1. Ensure you have the required prerequisites installed:
+    - [npm](https://www.npmjs.com/) *(version 9.5.1 or higher)*
+    - [Google Chrome](https://www.google.com/chrome/) *(version 112.0 or higher)*
 2. Fork the Trydent repository to your own GitHub account.
-3. Clone your forked repository to your local machine.
+3. Clone your forked repository to your local machine:
 ```bash
 git clone https://github.com/<your-github-username>/trydent.git
 ```
-4. Navigate to the root project directory and install dependencies.
+4. Navigate to the root project directory and install dependencies:
 ```bash
 cd trydent
 npm install
 ```
-5. Navigate to the client directory and install dependencies.
+5. Navigate to the client directory and install dependencies:
 ```bash
 cd client
 npm install
 ```
-6. Build the application in the client directory
+6. In the client directory, build the application:
 ```bash
 npm run build
 ```
 7. Load Trydent into your Chrome extensions.
     - Open Google Chrome and navigate to `chrome://extensions/`
     - Enable Developer Mode
-    - Click "Load unpacked" and select the `extensions` directory in your local 'trydent' repository.  
+    - Click "Load unpacked" and select the `extensions` directory in your local Trydent repository.  
 
-Now you should be able to change Trydent code and see the changes instantly reflected in your browser!
+Now you should be able to access Trydent in the developer tools or right-click and select Trydent.
 
-## Documentation for Consideration
-Trydent is a tool aimed to provide a better experience for developers in creating E2E tests. Therefore, it is recommended to familiarize yourself with the [Trydent documentation](./chrome-overview).
+<Tip>
+Trydent is a tool aimed to provide a better experience for developers in creating E2E tests.   
+Therefore, it is recommended to familiarize yourself with the [Trydent documentation](./chrome-overview).  
+Please ensure you have read the documentation before contributing to the project.
+</Tip>
 
 ## Coding Standards
 
@@ -46,6 +49,7 @@ Follow these coding standards when contributing to Trydent:
     title="ESLint"
     icon="broom"
     href="https://eslint.org/"
+    color="#00FF00"
   >
   Use ESLint to ensure your code adheres to the project's style guidelines.
   </Card>
@@ -53,19 +57,21 @@ Follow these coding standards when contributing to Trydent:
     title="JSDocs"
     icon="font"
     href="https://jsdoc.app/"
+    color="FFC0CB"
   >
   Write comments to explain code following the JSDoc format. Also, use descriptive variable and function names.
   </Card>
   <Card
     title="Modularization"
     icon="shapes"
+    color="FFA500"
   >
   Organize your code into logical units and separate files as needed.
   </Card>
 </CardGroup>
 
 ## File Structure
-```
+```bash
 .
 ├── LICENSE
 ├── README.md
@@ -166,12 +172,14 @@ Before submitting a new issue or bug report, please search the existing issues t
   <Card
     title="Expected vs Actual"
     icon="bug"
+    color="#FF0000"
   >
   Describe expected behavior and actual behavior (for bug reports).
   </Card>
   <Card
     title="Pictures"
     icon="camera"
+    color="#A020F0"
   >
   Include screenshots, logs, or error messages (if applicable).
   </Card>
