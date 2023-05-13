@@ -1,8 +1,10 @@
 ---
-title: background.js
+title: background script
+description: /extension/background.js
 ---
 
-The `background.js` file is responsible for managing communication between the content script and the DevTools panel. It listens for connections from the DevTools panel, injects the content script into the active tab, and handles messages from the content script and the DevTools panel.
+The `background.js` file is an essential component in the extension's architecture, managing communication between the content script and the DevTools panel. It sets up listeners for various events, injects the content script into active tabs, and forwards messages from the content script to the DevTools panel.
+
 
 ## Overview
 
@@ -13,7 +15,8 @@ The background script sets up listeners for the following events:
 3. Messages from the content script
 4. Context menu item clicks
 
-When a connection is made with the DevTools panel, the background script injects the content script into the active tab. Messages from the content script are forwarded to the DevTools panel.
+Upon establishing a connection with the DevTools panel, the script injects the content script into the currently active tab.
+
 
 ## Functions
 
@@ -21,7 +24,7 @@ When a connection is made with the DevTools panel, the background script injects
 This function is a listener for messages from the DevTools panel. It injects the content script into the tab specified by the message object.
 
 ### chrome.runtime.onConnect.addListener(callback)
-This event listener listens for connections from the DevTools panel. When a connection is made, the `devToolsListener` function is added as a message listener and the content script is injected into the active tab.
+This listener waits for connections from the DevTools panel. Once a connection is established, the devToolsListener function is added as a message listener and the content script is injected into the active tab. The devToolsListener function is then removed when the DevTools disconnects.
 
 ### chrome.tabs.onActivated.addListener(callback)
 This event listener listens for tab activation events. When a tab is activated, the content script is injected into the tab.
@@ -37,24 +40,52 @@ This event listener listens for context menu item clicks. When the context menu 
 <CodeGroup>
 ```javascript devToolsListener
 /**
- * Listener function for messages from the devtools script
- * Injects a content script into the tab specified by the message
- *
- * @param {Object} message - The message object
+ * Connection to the devtools page
+ * @type {chrome.runtime.Port}
  */
-function devToolsListener(message) {
-  // console.log('we are in background.js');
+let devToolsConnection;
 
-  chrome.scripting.executeScript({
-    target: { tabId: message.tabId },
-    files: [message.scriptToInject],
-  });
-}
 ```
 
 ```javascript chrome.runtime.onConnect.addListener
+/**
+ * Listener for connection from devtools page
+ * Executes the content script upon connection and sets up message listeners
+ * @see https://developer.chrome.com/docs/extensions/reference/runtime/#event-onConnect
+ * @listens chrome.runtime.onConnect
+ * @param {chrome.runtime.Port} connection - connection to devtools page
+ */
 chrome.runtime.onConnect.addListener((connection) => {
   devToolsConnection = connection;
+
+  /**
+   * Listener function for messages fromt the devtools script
+   * Injects a content script into the tab specified by the message
+   *
+   * @param {Object} message - The message object
+   */
+  const devToolsListener = function (message) {
+    // console.log('we are in background.js');
+
+    chrome.scripting.executeScript({
+      target: { tabId: message.tabId },
+      files: [message.scriptToInject],
+    });
+  };
+
+  /**
+   * Listener for tab activation events
+   * Injects the content script into the activated tab
+   *
+   * @listens chrome.tab.onActivated
+   */
+  chrome.tabs.onActivated.addListener(() => {
+    // console.log('changed to tab: ', tabId);
+    chrome.scripting.executeScript({
+      target: { tabId: message.tabId },
+      files: [message.scriptToInject],
+    });
+  });
 
   // Add devToolsListener function as a listener for messages from the DevTools script
   devToolsConnection.onMessage.addListener(devToolsListener);
@@ -66,17 +97,14 @@ chrome.runtime.onConnect.addListener((connection) => {
 });
 ```
 
-```javascript chrome.tabs.onActivated.addListener
-chrome.tabs.onActivated.addListener(() => {
-  // console.log('changed to tab: ', tabId);
-  chrome.scripting.executeScript({
-    target: { tabId: message.tabId },
-    files: [message.scriptToInject],
-  });
-});
-```
-
 ```javascript chrome.runtime.onMessage.addListener
+/**
+ * Listener for messages from the content scripts
+ * Handles events and sends messages to the devtools connection
+ *
+ * @listens chrome.runtime.onMessage
+ * @param {Object} message - The message object
+ */
 chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
@@ -91,6 +119,9 @@ chrome.runtime.onMessage.addListener((message) => {
       break;
     case 'change':
       // console.log('Changed, message: ', message);
+      break;
+    case 'keydown':
+      // console.log('keydown, message: ', message);
       break;
     default:
       // console.log('Unknown event, message: ', message);
@@ -122,6 +153,7 @@ chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
   };
   if (menuItemId === 'trydent-window') chrome.windows.create(options);
 });
+
 ```
 
 ```javascript chrome.contextMenus.create
@@ -133,5 +165,3 @@ chrome.contextMenus.create({
 });
 ```
 </CodeGroup>
-
-The `background.js` file sets up the necessary event listeners to manage communication between the content script and the DevTools panel, injects the content script into active tabs, and handles messages from the content script and the DevTools panel. The script also listens for context menu item clicks to open the Trydent window when needed.

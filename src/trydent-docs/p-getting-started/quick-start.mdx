@@ -1,0 +1,121 @@
+---
+title: Quick Start
+description: "Get your first test generated in just a few minutes"
+---
+
+## Installation: Chrome Web Store
+Trydent is available on the chrome web store for easily installation [here]().
+
+## Installation: Manual
+1. Ensure you have the required prerequisites installed:
+    - [npm](https://www.npmjs.com/) *(version 9.5.1 or higher)*
+    - [Google Chrome](https://www.google.com/chrome/) *(version 112.0 or higher)*
+2. Fork the Trydent repository to your own GitHub account.
+3. Clone your forked repository to your local machine:
+```bash
+git clone https://github.com/<your-github-username>/trydent.git
+```
+4. Navigate to the root project directory and install dependencies:
+```bash
+cd trydent
+npm install
+```
+5. Navigate to the client directory and install dependencies:
+```bash
+cd client
+npm install
+```
+6. In the client directory, build the application:
+```bash
+npm run build
+```
+7. Load Trydent into your Chrome extensions.
+    - Open Google Chrome and navigate to `chrome://extensions/`
+    - Enable Developer Mode
+    - Click "Load unpacked" and select the `extensions` directory in your local Trydent repository.  
+
+Now you should be able to access Trydent in the developer tools or right-click and select Trydent.
+
+## Generating End-To-End Tests
+<Card
+  title="1. Navigate and Open Trydent"
+>
+  Navigate to the page you want to test in your browser. Right-click and select Trydent. This will open the Trydent extension.
+</Card>
+<Card
+  title="2. Describe Statement"
+>
+  Enter the describe statement for your test. This will be the name of the test suite that is generated.
+  Proceed to "Start Test"
+</Card>
+<Card
+  title="4. It Statement"
+>
+  Enter the it statement for your test. This will be the name of the test case that is generated.
+  Proceed to the "Generate Test" button.
+</Card>
+<Card
+  title="5. End to End User Experience"
+>
+  Run through the user experience you want to test. Trydent will locally record your actions.
+  <Note>
+  Assertions enable you to validate the state of the DOM at any point during your test. You can add assertions by hovering over the component to assert and keydown "e" + "z" simultaneously.
+  </Note>
+  Your "Input Log" will be populated with the actions and assertions you make.
+</Card>
+<Card
+  title="6. Generate Code"
+>
+  Once you are finished recording, click the "Stop Recording and Generate Test" button. This will generate your test code.
+  You can press the copy button to immediately copy the code to your clipboard.
+</Card>
+
+
+
+
+## Get Help
+Contact us if you have any questions, or would like help with any issues.
+
+<CardGroup>
+  <Card
+    title="Follow us on Twitter"
+    icon="twitter"
+    href="https://twitter.com/TrydentOS"
+    color="#1DA1F2"
+  >
+    Follow us on Twitter to get the latest updates and news.
+  </Card>
+  <Card
+    title="React to our Medium article"
+    icon="hands"
+    href="https://cal.com/team/triggerdotdev/support"
+    color="#F87171"
+  >
+    Read our Medium article to learn more about Trydent. 
+  </Card>
+  <Card
+    title="Create an issue on Github"
+    icon="github"
+    href="https://github.com/oslabs-beta/trydent/issues"
+    color="#5865F2"
+  >
+  Open an issue at our GitHub repository if you have any questions or issues.
+  </Card>
+  <Card
+    title="Follow us on LinkedIn"
+    icon="linkedin"
+    href="https://www.linkedin.com/company/trydent-io"
+    color="#0A66C2"
+  >
+  Open an issue at our GitHub repository if you have any questions or issues.
+  </Card>
+  
+</CardGroup>
+  <Card
+    title="Give us a star on GitHub"
+    icon="star"
+    href="https://github.com/oslabs-beta/trydent"
+    color="#fbbf24"
+  >
+  Give us a star on GitHub if you like what we're doing.
+  </Card>
