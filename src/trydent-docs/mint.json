@@ -2,22 +2,21 @@
   "name": "Trydent",
   "logo": {
     "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
+    "light": "/logo/light.png",
+    "href": "https://trydent.io/"
   },
   "favicon": "/logo/logo.png",
   "colors": {
     "primary": "#0069ED",
     "light": "#4D9CFF",
-    "dark": "#0050B4"
-  },
-  "topbarLinks": [
-    {
-      "name": "Documentation",
-      "url": "p-application/chrome-overview"
+    "dark": "#0050B4",
+    "anchors": {
+      "from": "#033a80",
+      "to": "#0069ED"
     }
-  ],
+  },
   "topbarCtaButton": {
-    "name": "Github",
+    "type": "github",
     "url": "https://github.com/oslabs-beta/trydent"
   },
   "anchors": [
@@ -29,27 +28,25 @@
   ],
   "navigation": [
     {
-      "group": "Welcome",
+      "group": "Getting Started",
       "pages": [
-        "p-welcome/introduction",
-        "p-welcome/quick-start",
-        "p-welcome/features"
+        "p-getting-started/welcome",
+        "p-getting-started/quick-start"
+      ]
+    },
+    {
+      "group": "Documentation",
+      "pages": [
+        "p-application/chrome-overview",
+        "p-application/content-script",
+        "p-application/background-script",
+        "p-application/panel",
+        "p-application/utils"
       ]
     },
     {
       "group": "Contributing",
       "pages": [
-        {
-          "group": "Documentation",
-          "pages": [
-            "p-application/chrome-overview",
-            "p-application/context-script",
-            "p-application/background-script",
-            "p-application/panel",
-            "p-application/manifest",
-            "p-application/utils"
-          ]
-        },
         "p-application/contributing-guidelines"
       ]
     }
@@ -57,6 +54,7 @@
   "backgroundImage": "",
   "footerSocials": {
     "github": "https://github.com/oslabs-beta/trydent",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "linkedin": "https://www.linkedin.com/company/trydent-io",
+    "twitter": "https://twitter.com/TrydentOS"
   }
 }

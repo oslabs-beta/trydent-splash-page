@@ -1,5 +1,6 @@
 ---
-title: panel.js
+title: panel
+description: /extension/panel.js
 ---
 
 ## Overview
@@ -69,11 +70,6 @@ This asynchronous function imports the `describeCreator` function from the `test
   ```
 
   ```javascript backgroundPaeConnection
-  // Establishes a connection to background with a specific name
-  const backgroundPageConnection = chrome.runtime.connect({
-    name: 'devtools-page',
-  });
-
   // Relay the tab ID to the background page as an object
   backgroundPageConnection.postMessage({
     tabId: chrome.devtools.inspectedWindow.tabId,
