@@ -14,7 +14,7 @@ import members from '../members';
 const TeamSection:React.FC = () =>{
   const memberCards = members.map((el,i)=>{
     return <PersonCard
-    key ={i}
+    key = {i}
     firstName = {el.firstName}
     lastName = {el.lastName}
     title = {el.title}
