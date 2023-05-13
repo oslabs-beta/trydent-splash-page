@@ -28,6 +28,6 @@ To communicate with the background script, the panel script can use `chrome.runt
 3. The panel script establishes a connection with the background script using `chrome.runtime.connect()`. It can send and receive messages from the background script using `postMessage()` and listen for messages using an event listener.
 4. The panel script can also send messages to the content script through the background script by requesting the background script to relay the message using `chrome.tabs.sendMessage()`.
 
-![Communication Flow](./images/logic.png)
+![Communication Flow](../images/logic.png)
 
 By using this messaging system, the content script, background script, and panel script can communicate with each other, share data, and coordinate tasks to provide the extension's functionality.
