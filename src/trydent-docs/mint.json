@@ -42,7 +42,6 @@
         "p-application/content-script",
         "p-application/background-script",
         "p-application/panel",
-        "p-application/manifest",
         "p-application/utils"
       ]
     },
