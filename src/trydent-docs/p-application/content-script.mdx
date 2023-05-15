@@ -1,35 +1,33 @@
 ---
-title: context-script.js
+title: content-script
+description: /extension/content-script.js
 ---
 
 ## Overview
-The `content-script.js` file is responsible for listening to user interactions with the web page, extracting information about the target elements, and sending that information to the extension's background script and the Chrome DevTools panel.
-
-## Overview
-The script listens for the following events: 'click', 'focus', 'blur', and 'change'. When an event is detected, it captures the event's details, including the target element's XPath, and sends the information to the background script and the DevTools panel. This information is used to generate Cypress test code for the user interactions.
+The content-script.js file serves a vital role in monitoring user interactions with a web page, gathering details about the elements involved, and transmitting this data to the extension's background script and the Chrome DevTools panel. It tracks various types of events like 'click', 'focus', 'blur', and 'change'. On detecting an event, it captures the details, including the target element's XPath, and sends this information for further processing. This data aids in generating Cypress test code corresponding to the user interactions.
 
 ## Functions
 
 ### getRelativeXPath(element)
-
-This function takes an HTMLElement as an input and returns its relative XPath. The function prioritizes unique attributes (such as 'data-cy', 'data-test', 'data-testid', and 'id') when generating the XPath. If none of the unique attributes are present, the function calculates the element's position among its siblings with the same tag name. If the element is an anchor tag with an `href` attribute, the function updates global variables to indicate this.
+The `getRelativeXPath(element)` function accepts an HTMLElement and returns its relative XPath. It prioritizes unique attributes like 'data-cy', 'data-test', 'data-testid', and 'id' when forming the XPath. If none of these unique attributes are available, it determines the element's position amongst its siblings sharing the same tag name. For anchor tags with an href attribute, the function modifies global variables accordingly.
 
 ### inputEventListener(event, callback)
-This function serves as an event listener for input events like 'click', 'focus', 'blur', and 'change'. It takes an event object and a callback function as arguments. The function extracts relevant information from the event object (such as the target element's XPath and the event type) and then calls the callback function with the extracted data.
+The `inputEventListener(event, callback)` function serves as an event listener for input events like 'click', 'focus', 'blur', and 'change'. It takes an event object and a callback function as parameters. The function extracts relevant information from the event object, including the target element's XPath and the event type, and calls the callback function with the obtained data. This function also handles 'keydown', 'keyup', and 'mouseover' events, enabling the user to trigger custom events using a specific combination of keys.
 
 ## Event Listeners
-The script sets up event listeners for 'click', 'focus', 'blur', and 'change' events. For each event, it calls the `inputEventListener()` function, which in turn sends messages with the event details to the background script and the DevTools panel.
+The script sets up event listeners for 'click', 'focus', 'blur', 'change', 'keydown', 'keyup', and 'mouseover' events. It calls the `inputEventListener()` function for each event, which subsequently sends messages containing the event details to the background script and the DevTools panel.
 
 ## Code Snippets
 <CodeGroup>
 
 ```javascript getRelativeXPath
+
 // Flag to indicate if the target element is an anchor tag with an href attribute
 let a = false;
 // Store the href attribute value of the anchor tag
 let href = '';
 
-/** 
+/**
  * Get the relative XPath of an element
  * @param {HTMLElement} element - The target element
  * @returns {string} - The relative XPath of the element
@@ -79,17 +77,24 @@ function getRelativeXPath(element) {
 ``` 
 
 ```javascript inputEventListener
+
 /**
  * Event listener for input events (click, focus, blur, change).
  * @param {Event} event - The event object
  * @param {function} callback - Callback function to execute with the recorded event data
  */
+let firstKeyPressed = false;
+let secondKeyPressed = false;
+let assertionTarget;
+
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
   let initialValue;
   let inputValue;
   let newValue;
+  let xPathMouse;
+
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -110,8 +115,43 @@ function inputEventListener(event, callback) {
         callback({ xPath, eventType: 'input', inputValue: newValue });
       }
       break;
+    case 'keydown':
+      // listening for first key down
+      initialValue = event.target.value;
+      // only changes if first key is an 'e' - will remain until key up (see 'keyup event listener')
+      if (!firstKeyPressed && event.key === 'e') {
+        firstKeyPressed = true;
+      // eslint-disable-next-line brace-style
+      }
+      // listen for second key down an making sure its 'z'
+      else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
+        secondKeyPressed = true;
+        // trigger your event here takes assertion object created in mouseover case as input, reassigns path
+        href = assertionTarget.pathName;
+        callback({ xPath: assertionTarget.mouseXPath, eventType: 'assertion', inputValue: assertionTarget });
+      }
+      break;
+    case 'keyup':
+      // reset firstKeyPressed and secondKeyPressed when the keys are released
+      if (event.key === 'e') {
+        firstKeyPressed = false;
+      } else if (event.key === 'z') {
+        secondKeyPressed = false;
+      }
+      break;
+    case 'mouseover':
+      // continually reassign the Xpath and create an assertion target object as the mouse moves
+      xPathMouse = getRelativeXPath(event.target);
+      assertionTarget = {
+        mouseXPath: xPathMouse,
+        pathName: event.target.pathname,
+        className: event.target.className,
+        innerHTML: event.target.innerHTML,
+        id: event.target.id,
+        innerText: event.target.innerText,
+      };
+      break;
     default:
-      // console.log(`Unhandled event type: ${eventType}`);
   }
 }
 ```
@@ -121,11 +161,10 @@ function inputEventListener(event, callback) {
 const URL = window.location.href;
 
 // Add event listeners for 'click', 'focus', 'blur', and 'change' events
-['click', 'focus', 'blur', 'change'].forEach((action) => {
+['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover'].forEach((action) => {
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
     inputEventListener(event, (recordedEvent) => {
-      // console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
       const { xPath, eventType, inputValue } = recordedEvent;
       // Send the xPath as a message to the window
       window.postMessage({ xPath }, '*');
@@ -141,5 +180,6 @@ const URL = window.location.href;
 });
 // Set up the inputEventListener with an empty callback function
 inputEventListener({}, () => {});
+
 ```
 </CodeGroup>
