@@ -2,7 +2,7 @@
  * The About component renders a section that holds a link 
  * to the documentation 
  * @component
- * @returns {ReactElement} The TeamSection component
+ * @returns {ReactElement} The About Section component
  */
 
 const AboutSection:React.FC = () =>{
