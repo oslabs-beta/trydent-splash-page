@@ -31,12 +31,14 @@
       "group": "Getting Started",
       "pages": [
         "p-getting-started/welcome",
-        "p-getting-started/quick-start"
+        "p-getting-started/quick-start",
+        "p-getting-started/features"
       ]
     },
     {
       "group": "Documentation",
       "pages": [
+        "p-application/testing",
         "p-application/chrome-overview",
         "p-application/content-script",
         "p-application/background-script",
