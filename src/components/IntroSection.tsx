@@ -1,4 +1,4 @@
-import gif from '../assets/ezgif.com-video-to-gif.gif'
+import gif from '../assets/tutorial.gif'
 import { useState } from 'react';
 
 /**
@@ -29,7 +29,7 @@ const IntroSection:React.FC = () =>{
           onClick={handleClick}
         >
           <img src={gif}
-            className={`rounded-lg scale-75 transition duration-300 ease-in-out transform cursor-pointer  ${isClicked ? 'sm: scale-50  lg:scale-75 shadow-lg border border-white' : 'hover:scale-90'}`}
+            className={`rounded-lg scale-75 transition duration-300 ease-in-out transform cursor-pointer  ${isClicked ? 'sm: scale-50 lg:scale-75 shadow-lg border border-white' : 'hover:scale-90'}`}
             onClick={handleClick}
           />
         </div>
