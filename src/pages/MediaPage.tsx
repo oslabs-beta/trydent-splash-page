@@ -1,6 +1,7 @@
 
+import VideoSection from "../components/VideoSection"
 import MediumSection from "../components/MediumSection"
-import IntroSection from "../components/IntroSection"
+
 /**
  * The Media page contains all the information 
  * @component
@@ -14,7 +15,11 @@ const MediaPage :React.FC = () =>{
 
   return (
     <>
+    <div className="m-10"></div>
+    <div style={{ background: 'radial-gradient(at -800% -400%, #f6f6f6, #072854)' }}>
     <MediumSection></MediumSection>
+    <VideoSection></VideoSection>
+    </div>
     </>
     
   )

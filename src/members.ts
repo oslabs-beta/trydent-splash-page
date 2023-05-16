@@ -3,6 +3,7 @@ import eric from './assets/profiles/EricDunn.jpeg';
 import alastair from './assets/profiles/Alastair.jpg';
 import nicholas from './assets/profiles/Nicholas_Ly.jpeg';
 import sam from './assets/profiles/Sam_Lee.jpg';
+// import timmy from './assets/profiles/timmy.jpeg'
 
 /**
  * Creates the Member class
@@ -39,7 +40,11 @@ const Eric = new Member('Eric','Dunn','Software Engineer','https://www.linkedin.
 const Jacob = new Member('Jacob', 'Gillan', 'Software Engineer','https://www.linkedin.com/in/jacob-gillan/','https://github.com/JakeGillan',jake)
 const Nicholas = new Member('Nicholas','Ly','Software Engineer','https://www.linkedin.com/in/nicholasly/','https://github.com/nicholas-l-ly',nicholas)
 const Samuel = new Member('Samuel','Lee','Software Engineer','https://www.linkedin.com/in/leesamuel423/','https://github.com/leesamuel423',sam)
+// const Timmy = new Member('Timmy','Zhu','Software Engineer','https://www.linkedin.com/in/leesamuel423/','https://github.com/leesamuel423',timmy)
 
 
-const members:Member[] = [Alastair,Eric,Jacob,Nicholas,Samuel]
+const members:Member[] = [
+  Alastair,Eric,Jacob,Nicholas,Samuel
+  // ,Timmy
+]
 export default members
