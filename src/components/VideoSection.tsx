@@ -25,7 +25,7 @@ const VideoSection:React.FC = () =>{
 
 
   return(
-    <section className='p-10'>
+    <section className='m-10'>
       <h1 className="text-white text-3xl font-bold mt-5 mb-5">Watch our Videos!</h1>
       <section> 
         {videoCardsArray}
