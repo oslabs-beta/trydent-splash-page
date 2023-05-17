@@ -19,11 +19,11 @@ interface VideoCardProps {
 
 const VideoCard: React.FC<VideoCardProps>= ({srcURL, title, description}) => {
   return (
-    <li className="mb-10 pt-5 pb-5 bg-gray-100 bg-opacity-70 backdrop-blur-sm rounded-lg shadow-lg border border-white border-opacity-30 flex flex-col items-center md:flex-row justify-around list-none"
+    <li className="mb-10 bg-gray-100 bg-opacity-70 backdrop-blur-sm rounded-lg shadow-lg border border-white border-opacity-30 flex flex-col items-center md:flex-row justify-around list-none"
     style={{ background: 'radial-gradient(at -1000% 250%, #0f56b2, #dcdcdc)' }}>
-    <div className="pl-5 pr-5 pt-5 md:p-5">
+    <div className="">
     <iframe
-      className="rounded-lg scale-75 sm:scale-100"
+      className="rounded-lg scale-90 sm:scale-100 p-5"
       height="300"
       width="500"
       src={srcURL}
