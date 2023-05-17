@@ -62,7 +62,7 @@ const NavBar: React.FC = () => {
 
       {/* this is condtional rendering format {Boolean && (<>)} if boolean true(on click), render element in () */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 p-2 flex flex-col items-center space-y-3 border-t border-blue-900 rounded-sm bg-gray-300 bg-opacity-90 border-opacity-30 backdrop-blur">
+        <div className="md:hidden absolute top-full left-0 right-0 p-2 flex flex-col items-center space-y-3 border-t border-blue-900 rounded-sm bg-gray-100 bg-opacity-90 border-opacity-30 backdrop-blur">
           <a className="block text-blue-900 transition duration-300 ease-in-out transform hover:scale-105" href="https://trydent.mintlify.app/introduction">Docs</a>
             {/* need to change below to a navigation to the media page */}
           <a className="block text-blue-900 transition duration-300 ease-in-out transform hover:scale-105" href="/media">Media</a>
