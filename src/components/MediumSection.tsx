@@ -28,7 +28,7 @@ const MediumSection:React.FC = () =>{
           className="text-2xl font-bolds">
           Practice Safe Tests || Automate E2E Testing || Trydent
           </a>
-          <p className="pt-5">The primary purpose of Trydent is to help developers and quality assurance engineers easily generate Cypress test code, saving time and effort while ensuring comprehensive test coverage. With Trydent, developers can create tests quickly, detect issues earlier in the development process, and maintain high-quality code standards.</p>
+          <p className="pt-2.5">The primary purpose of Trydent is to help developers and quality assurance engineers easily generate Cypress test code, saving time and effort while ensuring comprehensive test coverage. With Trydent, developers can create tests quickly, detect issues earlier in the development process, and maintain high-quality code standards.</p>
          </article>
       </div>
     </section>

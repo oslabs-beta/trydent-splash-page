@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import logo from '../assets/Brand Assets/trydent-name blue-main.png';
 import githubLogo from '../assets/github-mark/github-mark.png';
+import { NavLink} from 'react-router-dom';
 
 const NavBar: React.FC = () => {
+  
   // set state for sticky nav bar, this is important to keep it visible as users scrolls
   const [isSticky, setIsSticky] = useState(false);
   // as the page shrinks and or on phone, the menu will update 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+
 
   // when a user scrolls beyond the top of the page, update state
   useEffect(() => {
@@ -18,6 +23,7 @@ const NavBar: React.FC = () => {
         setIsSticky(false);
       }
     };
+
     // listen for scrolling 
     window.addEventListener('scroll', handleScroll);
     // removes event listener when unmounting 
@@ -43,7 +49,12 @@ const NavBar: React.FC = () => {
       <div className="hidden md:flex items-center space-x-4">
         <a className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105" href="https://trydent.mintlify.app/introduction">Docs</a>
         {/* need to change below to a navigation to the media page */}
-        <a className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105" href="/media">Media</a>
+        <nav>
+        <NavLink className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105"  
+                to="/media">Media</NavLink>
+        </nav>
+        
+        
         <a className="transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl"href="https://github.com/oslabs-beta/trydent">
           <img src={githubLogo} className="w-7 h-auto" alt="GitHub Logo" />
         </a>
