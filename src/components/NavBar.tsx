@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full bg-gray-300 bg-opacity-90 p-2 flex justify-between rounded-sm pl-5 pr-5 backdrop-blur-sm ${isSticky ? 'shadow-lg' : ''}`} style={{ zIndex: 9999 }}>
+    <nav className={`fixed top-0 left-0 w-full bg-gray-100 bg-opacity-90 p-2 flex justify-between rounded-sm pl-5 pr-5 backdrop-blur-sm ${isSticky ? 'shadow-lg' : ''}`} style={{ zIndex: 9999 }}>
       <div className="flex items-center ">
         <a href="/">
           <img className="h-7 transition duration-300 ease-in-out transform hover:scale-105" src={logo} alt="Logo" />
