@@ -14,11 +14,11 @@ const HomePage :React.FC = () =>{
 
   return (
     <>
-      <IntroSection></IntroSection>
-      <AboutSection></AboutSection>
-      <GetStartedSection></GetStartedSection>
-      <TeamSection></TeamSection>
-      <FooterSection></FooterSection>
+      <IntroSection />
+      <AboutSection />
+      <GetStartedSection />
+      <TeamSection />
+      <FooterSection />
     </>
     
   )
