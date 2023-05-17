@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import logo from '../assets/Brand Assets/trydent-name blue-main.png';
 import githubLogo from '../assets/github-mark/github-mark.png';
-import { NavLink} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const navigate = useNavigate();
+  const toMediaPage = () =>{navigate('/media')}
   
   // set state for sticky nav bar, this is important to keep it visible as users scrolls
   const [isSticky, setIsSticky] = useState(false);
@@ -49,12 +51,7 @@ const NavBar: React.FC = () => {
       <div className="hidden md:flex items-center space-x-4">
         <a className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105" href="https://trydent.mintlify.app/introduction">Docs</a>
         {/* need to change below to a navigation to the media page */}
-        <nav>
-        <NavLink className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105"  
-                to="/media">Media</NavLink>
-        </nav>
-        
-        
+        <p className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer" onClick={toMediaPage}> Media</p>
         <a className="transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl"href="https://github.com/oslabs-beta/trydent">
           <img src={githubLogo} className="w-7 h-auto" alt="GitHub Logo" />
         </a>
@@ -75,11 +72,7 @@ const NavBar: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 p-2 flex flex-col items-center space-y-3 border-t border-blue-900 rounded-sm bg-gray-100 bg-opacity-90 border-opacity-30 backdrop-blur">
           <a className="block text-blue-900 transition duration-300 ease-in-out transform hover:scale-105" href="https://trydent.mintlify.app/introduction">Docs</a>
-            {/* need to change below to a navigation to the media page */}
-          <nav>
-            <NavLink className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105"  
-                to="/media">Media</NavLink>
-           </nav>
+          <p className="text-blue-900 font-bold transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer" onClick={toMediaPage}> Media</p>
           <a className="block text-blue-900 transition duration-300 ease-in-out transform hover:scale-105" href="https://github.com/oslabs-beta/trydent">Github</a>
         </div>
       )}

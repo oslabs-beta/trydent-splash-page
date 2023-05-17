@@ -3,7 +3,7 @@ import NavBar from './NavBar'
 import HomePage from '../pages/HomePage'
 import MediaPage from '../pages/MediaPage';
 import React from 'react';
-import { useNavigate, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   // const navigate = useNavigate();
