@@ -32,7 +32,7 @@ const VideoCard: React.FC<VideoCardProps>= ({srcURL, title, description}) => {
     </div>
     <article className="p-5 md:w-2/3 pr-5 self-start">
       <h2 className='font-bold text-2xl'>{title}</h2>
-      <p>{description}</p>
+      <p className='pt-2.5'>{description}</p>
     </article>
   </li>
   );
