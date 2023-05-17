@@ -38,7 +38,6 @@
     {
       "group": "Documentation",
       "pages": [
-        "p-application/testing",
         "p-application/chrome-overview",
         "p-application/content-script",
         "p-application/background-script",
