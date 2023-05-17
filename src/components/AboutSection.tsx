@@ -19,7 +19,7 @@ const AboutSection:React.FC = () =>{
       <p className='font-bold text-3xl mb-2 text-blue-900'>Easy and Intuitive</p>
       <p className="text-lg text-blue-900 mb-5 w-1/2" >Trydent allows you to easily generate Cypress code through your Chrome Devtools by interacting directly with your browser, saving you time and effort when building your App. Check out our videos to learn more about Trydent!</p>
       {/* <a className="inline-block bg-blue-600 hover:bg-gray-300 text-gray-100 hover:text-blue-900 font-bold py-2 px-4 rounded-full transition-colors duration-300" href="/media">Learn More</a> */}
-      <p className="inline-block bg-blue-600 hover:bg-gray-300 text-gray-100 hover:text-blue-900 font-bold py-2 px-4 rounded-full transition-colors duration-300"  onClick={toMediaPage}> Media</p>
+      <p className="inline-block bg-blue-600 hover:bg-gray-300 text-gray-100 hover:text-blue-900 font-bold py-2 px-4 rounded-full transition-colors duration-300"  onClick={toMediaPage}> Learn more</p>
     </section>
     </>
     
