@@ -1,25 +1,28 @@
 import '../index.css'
-import AboutSection from './AboutSection'
-import FooterSection from './FooterSection'
-import GetStartedSection from './GetStartedSection'
-import IntroSection from './IntroSection'
 import NavBar from './NavBar'
-import TeamSection from './TeamSection'
+import HomePage from '../pages/HomePage'
+import MediaPage from '../pages/MediaPage';
+import React from 'react';
+import { useNavigate, Routes, Route } from 'react-router-dom';
 
 function App() {
+  // const navigate = useNavigate();
 
 
   return (
     <>
-      <NavBar></NavBar>
-      <IntroSection></IntroSection>
-      <AboutSection></AboutSection>
-      <GetStartedSection></GetStartedSection>
-      <TeamSection></TeamSection>
-      <FooterSection></FooterSection>
+    <div className='router'>
+        <NavBar></NavBar>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/media" element={<MediaPage />} />
+      </Routes>
+
+    </div>
     </>
     
   )
 }
+
 
 export default App

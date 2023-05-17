@@ -21,8 +21,10 @@ interface PersonCardProps {
 
 const PersonCard: React.FC<PersonCardProps> = ({ firstName, lastName, title, linkedinURL, githubURL, image }) => {
   return (
-    <li className="bg-gray-300 bg-opacity-20 backdrop-blur-sm rounded-lg shadow-lg border border-white border-opacity-30 p-6 flex flex-col space-y-1 items-center list-none transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ">
-      <img src={image} className="w-40 h-40 rounded-full border border-white border-opacity-30"></img>
+    <li className="bg-gray-400 bg-opacity-20 backdrop-blur-sm rounded-lg shadow-lg border border-blue border-opacity-10 p-6 flex flex-col space-y-1 items-center list-none transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl "
+    style={{ background: 'radial-gradient(at -1000% 250%, #0f56b2, #dcdcdc)' }}
+    >
+      <img src={image} className="w-40 h-40 rounded-full border border-blue border-opacity-30"></img>
       <h4 className="font-bold pt-2 text-blue-900">
         {firstName} {lastName}
       </h4>

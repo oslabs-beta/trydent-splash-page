@@ -1,4 +1,4 @@
-import gif from '../assets/ezgif.com-video-to-gif.gif'
+import gif from '../assets/tutorial.gif'
 import { useState } from 'react';
 
 /**
@@ -22,14 +22,17 @@ const IntroSection:React.FC = () =>{
         <article className="text-center mb-5 w-3/4">
           <h1 className="text-5xl font-bold mb-4">Quickly generate E2E tests with Cypress code</h1>
           <p className="mb-4 text-2xl">Trydent is a Chrome DevTool that enables you to save time on your end-to-end tests by autogenerating Cypress code.</p>
-          <a className="inline-block bg-gray-300 hover:bg-blue-600 text-blue-900 hover:text-gray-300 font-bold py-2 px-4 rounded-full transition-colors duration-300" href="https://trydent.mintlify.app/introduction">Get Started</a>
+          <a className="inline-block bg-gray-300 hover:bg-blue-600 text-blue-900 hover:text-gray-300 font-bold py-2 px-4 rounded-full transition-colors duration-300" 
+          href="https://trydent.mintlify.app/p-getting-started/quick-start">
+            Get Started
+            </a>
         </article>
         <div
           className={` ${isClicked ? ' flex justify-center items-center min-h-screen fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-30 backdrop-blur-md  z-50' : ''}`}
           onClick={handleClick}
         >
           <img src={gif}
-            className={`rounded-lg transition duration-300 ease-in-out transform cursor-pointer  ${isClicked ? 'sm: scale-105 lg:scale-150 shadow-lg border border-white' : 'hover:scale-105'}`}
+            className={`rounded-lg scale-75 transition duration-300 ease-in-out transform cursor-pointer  ${isClicked ? 'sm: scale-50 lg:scale-75 shadow-lg border border-white' : 'hover:scale-90'}`}
             onClick={handleClick}
           />
         </div>

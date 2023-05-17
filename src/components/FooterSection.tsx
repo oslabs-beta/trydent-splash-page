@@ -14,7 +14,7 @@ const FooterSection:React.FC = () =>{
       <ul className="flex flex-col items-center space-y-2">
         <li className="font-bold"><a>Connect with us</a></li>
         <li><a href="https://github.com/oslabs-beta/trydent">GitHub</a></li>
-        <li><a href="">Linkedin</a></li>
+        <li><a href="https://www.linkedin.com/company/trydent-io/?viewAsMember=true">Linkedin</a></li>
         <li><a href="https://twitter.com/TrydentOS">Twitter</a></li>
       </ul>
     </section>
