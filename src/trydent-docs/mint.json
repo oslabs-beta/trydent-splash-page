@@ -20,11 +20,6 @@
     "url": "https://github.com/oslabs-beta/trydent"
   },
   "anchors": [
-    {
-      "name": "Changelog",
-      "icon": "list",
-      "url": "https://mintlify.com"
-    }
   ],
   "navigation": [
     {
